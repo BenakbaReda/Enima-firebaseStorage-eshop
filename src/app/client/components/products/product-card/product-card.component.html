@@ -1,0 +1,71 @@
+ 
+<mat-card class="example-card"     appMaterialElevator  [defaultElevation]="2" [raisedElevation]="16"     >
+    <mat-card-header>
+        <img  mat-card-avatar   class="example-header-image"  src="{{product.Images[0].Url}}" alt="Photo of {{product.Name}}">
+        <mat-card-title >
+            
+            <button mat-button    color="accent" class="mat-card-button"   > {{product.Price}} DA </button>
+         </mat-card-title> 
+        <!-- <mat-card-subtitle>{{product.Name}}   </mat-card-subtitle> -->
+        <mat-card-subtitle>Code uuid : {{product.uuid}} </mat-card-subtitle> 
+        <mat-card-subtitle>Code   cat : {{product.Categorie}} </mat-card-subtitle>
+        <mat-card-subtitle>Code brand : {{product.Brand}} </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="imgs"   
+                        src="{{getFaceImageFRomPhotos()}}" 
+                        alt="Photo of {{product.Name}}" 
+                        [routerLink]="['/products',product.uuid]">
+    <mat-card-content [routerLink]="['/products',product.uuid]">
+
+        <div  style="display: flex; flex-direction: row; justify-content:space-between; justify-items: center; margin: 10px;" >
+       
+
+            <div  style="display: flex; flex-direction: row; justify-content:start; justify-items: center; margin: 10px;" >
+       
+                <button mat-icon-button   *ngFor="let rate of  BuildArrayNumber(5);let i = index "  >
+                <mat-icon    color ="accent" >
+                    {{showIcon(i)}}
+                </mat-icon>
+     
+              </button>
+            </div>
+
+
+            <mat-icon  matBadge="{{product.Stocks}}"  color="accent"  matBadgeColor="accent" matBadgeOverlap="false" > store   </mat-icon>
+         </div>
+       
+    </mat-card-content>
+    <mat-card-actions>
+    
+        <div  style="display: flex; flex-direction: row; justify-content:space-between; justify-items: center; margin: 10px;" >
+        <button     mat-mini-fab 
+                    [routerLink]="['/products',product.uuid]"
+                    [color]="colorDetail"   
+                    (mouseover)="colorDetail = 'primary'" 
+                    (mouseout)="colorDetail = 'accent'" >
+                    <mat-icon>description</mat-icon>
+            </button>
+            <div  style="display: flex; flex-direction: row; justify-content:center; justify-items: center" >
+                  <button mat-icon-button color ="accent"   (click)="decrementQuantity()" >
+                      <mat-icon> remove_circle_outline </mat-icon>
+                  </button>
+                  <mat-form-field  style="max-width: 50px; text-align: center;">
+                      <input matInput type="number" placeholder="quantity" [(ngModel)]="quantity" >
+                  </mat-form-field>
+                  <button mat-icon-button color ="accent"   (click)="incrementQuantity()"  >
+                      <mat-icon> add_circle_outline  </mat-icon>
+                  </button>
+            </div>
+            <button         mat-mini-fab 
+                            [color]="colorAdd"   
+                            (mouseover)="colorAdd = 'primary'" (click)="addItemToBasket()"   matTooltip="add the product to basket" 
+                            (mouseout) ="colorAdd = 'accent'">
+                            <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+       
+          </div>
+
+      
+    </mat-card-actions>
+</mat-card>
+ 

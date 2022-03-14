@@ -1,0 +1,88 @@
+ 
+    <div  fxLayout="column">
+        <mat-toolbar  fxLayoutAlign="space-around center"  >
+            <button   mat-button  color="accent" >Product ID : {{data.uuid}}</button>
+            <button mat-mini-fab    aria-label="delete Product"  (click)="UploadImages()"  >
+                <mat-icon> save </mat-icon>
+            </button>
+        </mat-toolbar>
+  
+        <div fxLayout="row wrap">
+          <div fxLayout="column"  fxFlex="50">
+              <mat-toolbar  style="margin-top: 25px;"  fxLayoutAlign="space-around center"  >
+                <span>product images :</span>
+                <button mat-icon-button  color="primary" (click)="inputField.click()">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+                <input #inputField hidden type="file" (change)="onFileSelected($event)" />
+              </mat-toolbar>
+              <div  fxLayout="row wrap" fxLayoutAlign="center center"    > 
+                <div class="div_image" fxLayout="column" *ngFor="let elm of Images"  >
+                 
+                  <img  *ngIf="!elm.isDeleted"  class="imgEnima" alt="photo of {{elm.image.Name}}" 
+                   src="{{   (elm.isChanged===true) || (elm.isNew===true)?elm.src: elm.image.Url }}"   > 
+                
+                  <div  *ngIf="!elm.isDeleted"   fxLayout="row wrap" fxLayoutAlign="space-around center" >
+                    <button mat-icon-button color="primary" (click)="inputField.click()">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <input #inputField hidden type="file" (change)="onUpdateImage($event, elm)" />
+                    <button mat-icon-button color="warn"  (click)="onDeleteImage( elm)"  >
+                      <mat-icon aria-label="Delete">delete_forever</mat-icon>
+                    </button>
+                  </div>
+                  <mat-progress-bar *ngIf="!elm.isDeleted"      color="warn" [value]="elm.percentage"  ></mat-progress-bar>  
+                </div>
+              </div>
+          </div>
+          <div fxLayout="column"   fxFlex="50">
+              <mat-toolbar  style="margin: 25px;"  >
+                <span>product informations :</span>
+              </mat-toolbar>
+         
+              <div  fxLayout="row wrap"  style="margin: 25px;"   >
+                <mat-form-field color="accent">
+                <input matInput placeholder="name"    [(ngModel)]="data.Name" name="name">
+                <mat-icon matSuffix color="accent">business  </mat-icon>
+                </mat-form-field>
+                <mat-form-field color="accent">
+                  <input  matInput  type="number" #input   placeholder="price" [(ngModel)]="data.Price" name="price" required > 
+                  <mat-icon matSuffix color="accent">monetization_on</mat-icon>
+                </mat-form-field>
+              </div>
+          
+              <div  fxLayout="row wrap" style="margin: 25px;"  >
+            
+                <mat-form-field color="accent" >
+                  <input  matInput  type="number" #inputstate    placeholder="stocks" [(ngModel)]="data.Stocks" name="stocks"  required >
+                  <mat-icon matSuffix color="accent">archive  </mat-icon>
+                </mat-form-field>
+                <mat-form-field color="accent">
+                  <input matInput  type="number"   placeholder="rating" [(ngModel)]="data.Rating" name="rating">
+                  <mat-icon matSuffix color="accent">stars   </mat-icon>
+                </mat-form-field>
+               </div>
+      
+               <div  fxLayout="row wrap" style="margin: 25px;"  >
+                <mat-form-field appearance="fill">
+                  <mat-label>select Brand</mat-label>
+                  <mat-select [(ngModel)]="data.Brand"  required>
+                    <mat-option *ngFor="let brand of brands" [value]="brand.Name">
+                      {{brand.Name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                 <mat-label>select categorie</mat-label>
+                 <mat-select  [(ngModel)]="data.Categorie"    required>
+                   <mat-option *ngFor="let categorie of categories" [value]="categorie.Name">
+                     {{categorie.Name}}
+                   </mat-option>
+                 </mat-select>
+               </mat-form-field>
+               </div>
+          </div>
+        </div>
+  </div>
+    

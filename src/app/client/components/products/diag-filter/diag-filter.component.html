@@ -1,0 +1,60 @@
+ 
+  <div  fxLayout="column" fxLayoutAlign="center center"   >
+
+    <div        >
+      <button  mat-mini-fab    (click)="onNoClick()"  matTooltip="close filter"  >
+        <mat-icon> close </mat-icon>
+      </button>
+    </div> 
+
+    <br> 
+    <div   fxLayout="column"    >
+      <h3>Catgegories : </h3>
+      <mat-form-field  appearance="outline" color="accent">
+        <mat-select disableOptionCentering >
+          <mat-option *ngFor="let categorie of categories" [value]="categorie.uuid"  (click)="selectionChangeCategories(categorie.Name)">  {{categorie.Name}}  </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <h3> Brand :</h3>
+      <mat-form-field   appearance="outline" color="accent">
+        <mat-select disableOptionCentering >
+          <mat-option *ngFor="let brand of brands" [value]="brand.uuid"  (click)="selectionChangeBrands(brand.Name)">  {{brand.Name}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+ 
+
+      <h3>Price: </h3>
+      <br> 
+      <mat-form-field    >
+        <input matInput type="number" placeholder="price" [(ngModel)]="productFilter.Price" >
+      </mat-form-field>
+      <mat-slider  
+                      thumbLabel
+                      [displayWith]="formatLabel"
+                      [max]="steperFilter.max"
+                      [min]="steperFilter.min"
+                      [step]="steperFilter.step"
+                      [tickInterval]="steperFilter.tickInterval"
+                      [(ngModel)]="productFilter.Price">
+      </mat-slider>
+      <br>
+    </div> 
+    <div  style="display: flex; flex-direction: row; justify-content:space-between; justify-items: center; min-width: 200px;" >
+          
+ 
+      <button  mat-mini-fab   color="accent"  (click)="FilterChanged()"   matTooltip="applay filter"  cdkFocusInitial   >
+        <mat-icon> offline_pin </mat-icon>
+      </button>
+      <button  mat-mini-fab   color="accent" (click)="resetFilter()"  matTooltip="reset filter" >
+        <mat-icon>  delete_sweep    </mat-icon>
+      </button>
+      
+    </div>
+  </div> 
+
+  <!-- clear_all -->
+     
+
+ 

@@ -1,0 +1,28 @@
+.examples-container {
+    padding: 8px;
+  }
+  
+  .selected-files-container {
+    padding: 8px;
+  }
+  
+  .tab-container {
+    padding: 8px;
+    height: 250px;
+    background-color: blueviolet;
+  }
+  
+  .drop-zone-container {
+    outline: 2px dashed #e1e1e1;
+    height: 200px;
+    width: 100%;
+    margin-top: 15px;
+    cursor: pointer;
+  }
+
+  mat-form-field
+  {
+    min-width: 250px;
+    margin: 10px;
+
+  }

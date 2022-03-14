@@ -1,0 +1,27 @@
+.example-header-image {
+    background-size: cover;
+  }
+  
+  .example-card {
+      max-width: 400px;
+      margin-bottom: 25px;
+      justify-items: center;
+      justify-content: center;
+  }
+   
+  .imgs {
+    width: 350px;
+    height: 350px;
+    border-radius: 10px;
+    
+  }
+   
+  
+  .mat-card-button {
+   
+    font-size: 28px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+   
+  }
+   

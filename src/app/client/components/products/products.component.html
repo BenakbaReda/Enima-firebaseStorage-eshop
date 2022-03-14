@@ -1,0 +1,43 @@
+ 
+  <div  fxLayout="column" fxLayoutAlign="center center"     >
+    <div style="height: 90vh;" *ngIf="isloading">
+          <mat-spinner    > </mat-spinner>
+    </div>
+ 
+
+  <div  *ngIf="!isloading" 
+        fxLayout="column" fxLayoutAlign="center center"   >
+
+      <button  style="margin: 15px;" 
+                mat-mini-fab  
+                matTooltip="Filter products" 
+                color="accent" (click)="openDialog()"  
+                fxLayoutAlign="center center">
+        <mat-icon>  list  </mat-icon>
+      </button>
+     <br>
+      <div  *ngIf="DisplayProducts.length>0"  
+        fxLayout="row wrap" fxLayoutGap="55px"   
+        fxLayoutAlign="space-around center" >
+          <app-product-card  *ngFor="let product of DisplayProducts"   class ="animate__animated  animate__zoomIn  animate__slow  "
+                             
+                              [product]="product"  seletedAnimation = "animate__animated  animate__heartBeat  animate__slower animate__infinite">
+          </app-product-card>
+      </div> 
+      <mat-paginator  #paginator  color="warn"  showFirstLastButtons="firstLastButtons"   appMaterialElevator  [defaultElevation]="2" [raisedElevation]="16" 
+                      class="matPaginatorStyle2"
+                      *ngIf="DisplayProducts.length>0" 
+                      [length]="paginatorParam.length"
+                      [pageSize]="paginatorParam.pageSize"  
+                      [pageSizeOptions]="paginatorParam.pageSizeOptions"
+                      (page)="OnPageChange($event)">
+      </mat-paginator>
+
+
+      <button *ngIf="DisplayProducts.length==0"  mat-button color ="accent"   style="min-height: 700px;"  >
+        no product corresponding to you filter data 
+      </button>
+
+  </div> 
+</div>  
+ 

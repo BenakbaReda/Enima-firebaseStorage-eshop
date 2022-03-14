@@ -1,0 +1,69 @@
+  
+<div  *ngIf="isloading"  fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+    <mat-spinner  > </mat-spinner>
+</div> 
+
+<div  *ngIf="!isloading" fxLayout="column" fxLayoutAlign="center center" fxFlexFill>
+ 
+    <div  style="display: flex;flex-direction: row; margin: 10px;">
+        <div     fxLayout="row wrap" fxLayoutAlign="start center"   >
+        
+        
+          <img mat-card-image *ngFor="let elm of product.Images  ;let i = index"  
+          
+          class="imgs"  
+                  src="{{elm.Url}}" alt="Photo of {{product.Name}}" data-aos="zoom-in-up">
+        </div> 
+        <br>
+        <div   style="margin:10px ;"  data-aos="zoom-in-down"  >
+          <br>
+          <h3 style="font-size: 2em;">{{product.Name}}</h3>
+          <br>
+          <p style="font-size:medium;">{{product.Price}} DA</p>
+          <br>
+          <span   style="margin :5px ;"  matBadge="{{product.Stocks}}" 
+                  matBadgeColor="accent" matBadgeOverlap="false">Stock available</span> 
+          <br>
+          <br>
+          <div  fxLayout="row" fxLayoutAlign="start start"     > 
+              <button mat-icon-button   *ngFor="let rate of  BuildArrayNumber(5);let i = index "  >
+                  <mat-icon    color ="accent"   >
+                      {{showIcon(i)}}
+                  </mat-icon>
+              </button>
+          </div>
+          <br>
+          <br>
+          <div  fxLayout="row" fxLayoutAlign="center start"   > 
+            <button mat-icon-button color ="accent"   (click)="decrementQuantity()" >
+              <mat-icon> remove_circle_outline </mat-icon>
+            </button>
+            <mat-form-field  style="max-width: 60px; text-align: center;"  >
+              <input matInput type="number" placeholder="quantity" [(ngModel)]="quantity" >
+            </mat-form-field>
+            <button mat-icon-button color ="accent"   (click)="incrementQuantity()"  >
+              <mat-icon> add_circle_outline  </mat-icon>
+            </button>
+        </div>
+        <br>
+        <br>
+        <div   fxLayoutAlign="center center"   > 
+          <button mat-fab color ="accent"   (click)="addItemToBasket()"  matTooltip="add the product to basket" >
+            <mat-icon> add_shopping_cart </mat-icon>
+          </button>
+      </div><br>
+      <br>
+      <div  fxLayoutAlign="center center"    >
+
+
+          <button mat-stroked-button 
+                  color="accent" 
+                  matBadge="{{quantityBasket}}"   
+                  matBadgeColor="accent" 
+                  matBadgeOverlap="false">quantity in the backet</button>
+      </div>
+      </div> 
+  </div> 
+          
+</div>
+   
