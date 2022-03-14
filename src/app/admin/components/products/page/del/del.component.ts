@@ -86,7 +86,7 @@ deleteProduct()
  }
 
 
- isUseDeleteFromList=false;
+ //isUseDeleteFromList=false;
 /**
  * 
  * @param imageDTO 
@@ -94,76 +94,31 @@ deleteProduct()
  onDeleteClick( ): void {
     try {
  
-      if(this.data.Images){
+      if(this.data.Images.length>0){
         let PhotosUrl :IImage[] ;
         PhotosUrl=this.data.Images;
-       
-        if(this.isUseDeleteFromList){ 
-          /**
-           *  this methode offer somme error in some senario 
-           * to be performed 
-           */
-        this.storage.getFilesList(this.data.uuid )  
-        .subscribe(
-          (res)=> {
-            let itmNbr=  res.items.length;
-            let  counter=0; 
-            res.items.forEach((imageRef) => 
-            {
-               console.log(imageRef.name);
-               counter++;
-               imageRef.delete()
-                .then(()=> {
-                      this.toastr.success("Deleting image :"+ imageRef.name  +" success", "Deleting")
-
-                      if(counter ==itmNbr )
-                      {
-                        this.deleteProduct();
-                      }
-                 })
-                .catch( (error) => {
-                  console.log(error);
-                  this.toastr.error(" catch Error deleting product :"+ this.data.uuid +"  " + error, "Catch Error Deleting")
-                });
-              
-            })
-          },
-          err =>
-          {
-            
-            this.toastr.error("Error deleting product :"+ this.data.uuid +"  " + err, "subscribe Error Deleting")
-          }
-
-         )
-        }
-        else{
-            let counter=0;
-            PhotosUrl.forEach(elm=>
-              {    
-                 this.storage.deleteFileByUrl(elm.Url )
-                 .subscribe(
-                  resp=>{
-                   // console.log(resp);
-                    counter++;
-                    this.toastr.success("Deleting image :"+ elm.Name  +" success", "Deleting")
-                    if(counter === PhotosUrl.length)
-                    {
-                      this.deleteProduct();
-                    }
-                  },
-                  err=>{  
-                    
-                    this.toastr.error("Error deleting image :"+ elm.Name  +"  " + err, "subscribe Error Deleting")
-                    counter++; 
-                    if(counter === PhotosUrl.length)
-                    {
-                      this.deleteProduct();
-                    } 
-                  })  
-            } 
-
-            )
-          }
+        let counter=0;
+        PhotosUrl.forEach(elm=>
+          {    
+              this.storage.deleteFileByUrl(elm.Url )
+              .subscribe(
+              resp=>{
+                counter++;
+                this.toastr.success("Deleting image :"+ elm.Name  +" success", "Deleting")
+                if(counter === PhotosUrl.length)
+                {
+                  this.deleteProduct();
+                }
+              },
+              err=>{  
+                this.toastr.error("Error deleting image :"+ elm.Name  +"  " + err, "subscribe Error Deleting")
+                counter++; 
+                if(counter === PhotosUrl.length)
+                {
+                  this.deleteProduct();
+                } 
+              })  
+        })
       }
       else
       {
