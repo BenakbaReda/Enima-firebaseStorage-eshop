@@ -13,17 +13,21 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import { environment } from 'src/environments/environment';
 import { BlockUIModule } from 'ng-block-ui';
 import { ClientModule } from './client/client.module';
+import { HomeComponent } from './shared/components/home/home.component';
+import { MaterialModule } from './shared/modules/material/material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MaterialModule,
     AdminModule,
     ClientModule,
 

@@ -1,5 +1,5 @@
  
-    <div  fxLayout="column" >
+    <div  fxLayout="column" style="margin: 25px;"    >
       <mat-toolbar  fxLayoutAlign="space-around   center"  >
        
           <button  mat-button  color="accent" >Product ID : {{data.uuid}}</button>
@@ -10,10 +10,10 @@
         
       </mat-toolbar>
 
-      <div fxLayout="row wrap">
+      <div fxLayout="row wrap"  fxLayoutAlign="space-around   center" >
 
-        <div fxLayout="column"  fxFlex="50">
-          <mat-toolbar  style="margin-top: 25px;"  fxLayoutAlign="space-between center"  >
+        <div fxLayout="column"  style="margin: 25px;"    fxFlex="45">
+          <mat-toolbar    fxLayoutAlign="space-between center"  >
             <span>product images :</span>
             <button mat-stroked-button color="primary" disabled="{{_isStartUpload}}" (click)="_onReset()">Reset</button> 
           </mat-toolbar>
@@ -40,12 +40,12 @@
           </div>
         </div>
 
-        <div fxLayout="column"   fxFlex="50">
-          <mat-toolbar  style="margin: 25px;"  >
+        <div fxLayout="column"  style="margin: 25px;"     fxFlex="45">
+          <mat-toolbar    >
             <span>product informations :</span>
           </mat-toolbar>
        
-        <div  fxLayout="row wrap"  style="margin: 25px;"   >
+        <div  fxLayout="row wrap"      >
           <mat-form-field color="accent">
           <input matInput placeholder="name"    [(ngModel)]="data.Name" name="name">
           <mat-icon matSuffix color="accent">business  </mat-icon>
@@ -56,7 +56,7 @@
           </mat-form-field>
         </div>
     
-        <div  fxLayout="row wrap" style="margin: 25px;"  >
+        <div  fxLayout="row wrap"   >
       
           <mat-form-field color="accent" >
             <input  matInput  type="number" #inputstate    placeholder="stocks" [(ngModel)]="data.Stocks" name="stocks"  required >
@@ -70,7 +70,7 @@
 
    
 
-         <div  fxLayout="row wrap" style="margin: 25px;"  >
+         <div  fxLayout="row wrap"   >
           <mat-form-field appearance="fill">
             <mat-label>select Brand</mat-label>
             <mat-select [(ngModel)]="data.Brand"  required>

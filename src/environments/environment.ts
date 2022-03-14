@@ -11,6 +11,8 @@ const  ProductServerUrl: string = DEV_Product_Server;
 
  
 export const environment = {
+  production: false,
+
   firebase: {
     apiKey: "AIzaSyDOav8iCZTbfZhpL4CG7kww0Hi4HmYy4yI",
     authDomain: "enima-91660.firebaseapp.com",
@@ -19,16 +21,33 @@ export const environment = {
     messagingSenderId: "532431008041",
     appId: "1:532431008041:web:95316403a2a09a97f10738"
   },
-  production: false,
-  api: {
-    BaseUrlAccounts: AccountServerUrl,
-    BaseUrlProducts: ProductServerUrl,
+
+  apiBaseServer: {
+    Accounts: AccountServerUrl,
+    Products: ProductServerUrl,
+  },
+  product: {
+    TableProduct:"Products",
+    TableCategorie:"Categories",
+    TableBrand:"Brands",
+  },
+
+  account: {
+    TableUsers:"users",
+
   },
  
-  TableProduct:"Products",
-  TableCategorie:"Categories",
-  TableBrand:"Brands",
-  StorageImageDirName:"Images/Products"
+
+
+
+
+
+  storage:
+  {
+     DirectoryImage:"Images/Products"
+  }
+
+ 
 };
 
 /*

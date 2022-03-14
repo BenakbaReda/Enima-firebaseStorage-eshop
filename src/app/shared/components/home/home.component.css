@@ -1,0 +1,48 @@
+img 
+{
+   width: 100%;
+   height: auto;
+}
+
+ 
+ *{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+ }
+
+ .sectionpage
+ {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    scroll-snap-align :start ;
+ }
+
+ .container{
+   scroll-snap-type: y  mandatory;
+   overflow:auto;
+   height: 100vh;
+ }
+ .one{
+   background-color:lightslategray
+ }
+ .two{
+   background-color:indianred
+ }
+ .three{
+   background-color:cornflowerblue
+ }
+ .four{
+   background-color:goldenrod
+ }
+
+ 
+ 
+ 
+ 
+
+ 

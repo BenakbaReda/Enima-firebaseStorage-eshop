@@ -12,6 +12,6 @@ import { DataHttpService } from '../base/data-http.service';
 export class ProductService extends DataHttpService<IProduct, string> {
 
   constructor(protected override _http: HttpClient) {
-    super(_http, `${environment.api.BaseUrlProducts}${environment.TableProduct}`);
+    super(_http, `${environment.apiBaseServer.Products}${environment.product.TableProduct}`);
   }
 }

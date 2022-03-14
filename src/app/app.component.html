@@ -1,3 +1,35 @@
  
 
-<router-outlet></router-outlet>
+ 
+<mat-toolbar  style="height:8vh" class="mat-elevation-z10">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span     >{{title}}</span>
+      <!-- <img src="assets/bg-img/logo.png" style="margin: 5px; height: 55px;"> -->
+        <span class="example-spacer"></span> 
+        <div   fxShow="true" fxHide.lt-md="true" >
+        <!-- <app-navigation [isSideBar]="false" ></app-navigation> -->
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <mat-sidenav-container  >
+    <mat-sidenav #sidenav >
+      <!--   <app-navigation  [isSideBar]="true" ></app-navigation> -->
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+        <a href="#" mat-list-item>Menu Item 1</a>
+        <a href="#" mat-list-item>Menu Item 2</a>
+        <a href="#" mat-list-item>Menu Item 3</a>
+        <a href="#" mat-list-item>Menu Item 4</a>
+        <a href="#" mat-list-item>Menu Item 5</a>
+        <a href="#"mat-list-item>Menu Item 6</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>  
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>    
+    

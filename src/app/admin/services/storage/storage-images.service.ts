@@ -15,7 +15,7 @@ import { StorageFirestoreService } from './storage-firestore.service';
 export class StorageImagesService extends FirestoreBaseService {
 
   constructor(protected override storage: AngularFireStorage ) {
-    super(storage, `${environment.StorageImageDirName}`);
+    super(storage, `${environment.storage.DirectoryImage}`);
 
   }
 

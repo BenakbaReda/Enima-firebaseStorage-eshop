@@ -1,5 +1,5 @@
  
-    <div  fxLayout="column">
+    <div  fxLayout="column" style="margin: 25px;"   >
         <mat-toolbar  fxLayoutAlign="space-around center"  >
             <button   mat-button  color="accent" >Product ID : {{data.uuid}}</button>
             <button mat-mini-fab    aria-label="delete Product"  (click)="UploadImages()"  >
@@ -7,8 +7,8 @@
             </button>
         </mat-toolbar>
   
-        <div fxLayout="row wrap">
-          <div fxLayout="column"  fxFlex="50">
+        <div fxLayout="row wrap" fxLayoutAlign="space-around   center">
+          <div fxLayout="column"  style="margin: 25px;"     fxFlex="45">
               <mat-toolbar  style="margin-top: 25px;"  fxLayoutAlign="space-around center"  >
                 <span>product images :</span>
                 <button mat-icon-button  color="primary" (click)="inputField.click()">
@@ -35,7 +35,7 @@
                 </div>
               </div>
           </div>
-          <div fxLayout="column"   fxFlex="50">
+          <div fxLayout="column"   style="margin: 25px;"     fxFlex="45">
               <mat-toolbar  style="margin: 25px;"  >
                 <span>product informations :</span>
               </mat-toolbar>
