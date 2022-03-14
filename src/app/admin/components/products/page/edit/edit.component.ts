@@ -43,7 +43,7 @@ export class EditComponent implements OnInit {
 
   public categories :  ICategorie[] = [];   
   public brands :  IBrand[] = [];   
- 
+  startIdxAddedFile=0;
 
   
    constructor( private route: ActivatedRoute, 
@@ -180,15 +180,17 @@ onFileSelected(event) {
   if (file) {
 
     if(this.Images.length<6){
-        let startIdx= this.data.Images.length+ this.Images.length;
-
+    
+        var ext =  file.name.split('.').pop();
+        this.startIdxAddedFile++;
+        var name = this.data.uuid+"_Image_Edit_" + this.startIdxAddedFile +"."+ ext;
         let image:IUpdateImage ={
               file:file,
               isChanged:false,
               isNew:true,
               isDeleted:false,
               isFromProduct:false,
-              image:{Url:"",Name:this.data.uuid +"_new_"+startIdx+"_"+ file.name },
+              image:{Url:"",Name: name },
           } 
         const reader = new FileReader();
         reader.onload = (e: any) => {

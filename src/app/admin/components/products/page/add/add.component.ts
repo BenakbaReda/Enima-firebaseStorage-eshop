@@ -149,7 +149,9 @@ export class AddComponent implements OnInit {
       {
         const upload:UploadTask = new UploadTask(files[i]);
         idxName++;
-        upload.name=this.data.uuid+"_" + idxName +"_"+ files[i].name;
+        var ext =   files[i].name.split('.').pop();
+
+        upload.name=this.data.uuid+"_Image_" + idxName +"."+ ext;
         this.uploadOpList.push(upload);
       }
     } 
@@ -196,77 +198,81 @@ export class AddComponent implements OnInit {
   uploadAlltaskAndAdd() {
     this._isStartUpload=true;
     this.data.Images =[];
-    this.blockUIdropzone.start("start uploading ");
+   
     try {
-      let counter=0;
-      this.uploadOpList.forEach(elm => {
-        
-        elm.task = this.storage.uploadFileTask(this.data.uuid,elm.name,elm.file);
-        elm.percentage =  elm.task.percentageChanges();
-        elm.percentage.subscribe(
-          res => {
-            elm.percentageNbr= Math.round( res);
-          }
-        )
-        elm.snapshot   =  elm.task.snapshotChanges().pipe(
-          tap(snap => {
+      if(this.uploadOpList.length>0){
+          let counter=0;
+          this.blockUIdropzone.start("start uploading ");
+          this.uploadOpList.forEach(elm => {
+            elm.task = this.storage.uploadFileTask(this.data.uuid,elm.name,elm.file);
+            elm.percentage =  elm.task.percentageChanges();
+            elm.percentage.subscribe(
+              res => {
+                elm.percentageNbr= Math.round( res);
+              }
+            )
+            elm.snapshot   =  elm.task.snapshotChanges().pipe(
+              tap(snap => {
+                elm.State=of(elm.getState(snap));
+                switch( elm.getState(snap))
+                {
+                  case 'success' :
+                  {
+                  
+                    this.storage.getDownloadURL(this.data.uuid,elm.name)
+                    .subscribe(
+                                res=>{
+                                      counter++
+                                      elm.downloadURL = of(res);
+                                      const image :IImage ={ Name:elm.name,  Url:res};
+                                      this.data.Images.push(image);
+                                      this.toastr.success("uploading image :"+ elm.name  +" success", "uploading")
+                                      if(counter== this.uploadOpList.length){
+                                        console.log("save "+ counter)
+                                        this._save();
+                                      }
+                                },
+                                err =>{
+                                      this.toastr.error("uploading image :"+ elm.name  +" Error", "Error uploading")
+                                }
 
-            elm.State=of(elm.getState(snap));
-            switch( elm.getState(snap))
-            {
-              case 'success' :
-              {
-              
-                this.storage.getDownloadURL(this.data.uuid,elm.name)
-                .subscribe(
-                            res=>{
-                                  counter++
-                                  elm.downloadURL = of(res);
-                                  const image :IImage ={ Name:elm.name,  Url:res};
-                                  this.data.Images.push(image);
-                                  this.toastr.success("uploading image :"+ elm.name  +" success", "uploading")
-                                  if(counter== this.uploadOpList.length){
-                                    console.log("save "+ counter)
-                                    this._save();
-                                  }
-                            },
-                            err =>{
-                                  this.toastr.error("uploading image :"+ elm.name  +" Error", "Error uploading")
-                            }
+                    ); 
+                  }break; 
+                  case 'running' :
+                  {
 
-                ); 
-              }break; 
-              case 'running' :
-              {
+                  // console.log("snap.bytesTransferred  : "+ snap.bytesTransferred +"/"+ snap.totalBytes )
+                    
+                  }break; 
+                  case 'paused' :
+                  {
 
-               // console.log("snap.bytesTransferred  : "+ snap.bytesTransferred +"/"+ snap.totalBytes )
+                    console.log("uploading image :"+ elm.name  +" paused" );
+                    this.toastr.info("uploading image :"+ elm.name  +" paused", "uploading state")
+                  }break; 
+                  case 'error' :
+                  {
+                    console.error("uploading image :"+ elm.name  +" Error" );
+                    this.toastr.error("uploading image :"+ elm.name  +" Error", "uploading Error")
+                  }break; 
+                  
+                  case 'canceled' :
+                  {
+                    console.log("uploading image :"+ elm.name  +" canceled" );
+                    this.toastr.info("uploading image :"+ elm.name  +" canceled", "uploading canceled")
+                  }break; 
+                  
+    
+                }
                 
-              }break; 
-              case 'paused' :
-              {
-
-                console.log("uploading image :"+ elm.name  +" paused" );
-                this.toastr.info("uploading image :"+ elm.name  +" paused", "uploading state")
-              }break; 
-              case 'error' :
-              {
-                console.error("uploading image :"+ elm.name  +" Error" );
-                this.toastr.error("uploading image :"+ elm.name  +" Error", "uploading Error")
-              }break; 
-              
-              case 'canceled' :
-              {
-                console.log("uploading image :"+ elm.name  +" canceled" );
-                this.toastr.info("uploading image :"+ elm.name  +" canceled", "uploading canceled")
-              }break; 
-              
- 
-            }
-             
+              })
+            ) ;
+            elm.snapshot.subscribe();
           })
-        ) ;
-        elm.snapshot.subscribe();
-       })
+      }
+      else{
+        this._save();
+      }
     }
     catch (error) {
       console.error(error);
