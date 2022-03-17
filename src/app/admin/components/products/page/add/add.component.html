@@ -1,7 +1,9 @@
  
     <div  fxLayout="column" style="margin: 25px;"    >
-      <mat-toolbar  fxLayoutAlign="space-around   center"  >
-       
+      <mat-toolbar  fxLayoutAlign="space-between center"  >
+        <button mat-mini-fab color="accent"   (click)="_onBackProduct()">
+          <mat-icon> arrow_back   </mat-icon>
+        </button> 
           <button  mat-button  color="accent" >Product ID : {{data.uuid}}</button>
           <button  style="margin: 10px;" mat-mini-fab (click)="uploadAlltaskAndAdd()"   aria-label="add product"  disabled="{{_isStartUpload}}" >
               <mat-icon> playlist_add </mat-icon>
@@ -13,6 +15,7 @@
       <div fxLayout="row wrap"  fxLayoutAlign="space-around   center" >
 
         <div fxLayout="column"  style="margin: 25px;"    fxFlex="45">
+         
           <mat-toolbar    fxLayoutAlign="space-between center"  >
             <span>product images :</span>
             <button mat-stroked-button color="primary" disabled="{{_isStartUpload}}" (click)="_onReset()">Reset</button> 

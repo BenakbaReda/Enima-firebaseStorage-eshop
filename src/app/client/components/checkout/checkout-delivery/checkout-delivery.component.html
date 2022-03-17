@@ -1,0 +1,48 @@
+<div   fxLayout="column" fxLayoutAlign="space-around center"   fxLayoutGap="25px"  style="min-height: 60vh;" >
+     
+     
+  <h4 >Choose your delivery method</h4>
+  <div  fxLayout="column" fxLayoutAlign="space-around center"    [formGroup]="deliveryForm"   >
+       <div  fxLayout="row wrap" fxLayoutAlign="space-around center"   fxLayoutGap="25px"      >
+          <mat-radio-group
+                    aria-labelledby="example-radio-group-label" 
+                    class="example-radio-group"  formControlName="deliveryMethod"
+                    [(ngModel)]="selectedDeliveryMethod">
+              <mat-radio-button class="example-radio-button" *ngFor="let method of deliveryMethods"  [value]="method">
+              {{method.shortName}}
+              </mat-radio-button>
+          </mat-radio-group>
+
+          <label for="{{ method.Id }}" *ngFor="let method of deliveryMethods">
+            <strong>{{ method.shortName }} -
+                    {{ method.price | currency }}</strong>
+            <br />
+            <span class="label-description">{{ method.description }}</span>
+        </label>  
+      </div> 
+
+      <mat-accordion formControlName="deliveryMethod" >
+        <mat-expansion-panel   *ngFor="let method of deliveryMethods" >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{method.shortName}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ method.description }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <strong
+          >{{ method.shortName }} -
+          {{ method.price  } DA}</strong
+      >
+        </mat-expansion-panel>
+         
+      </mat-accordion>
+      
+  </div>  
+
+
+
+</div>
+
+

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ConnectableObservable } from 'rxjs';
 import { CustomerBasketService } from 'src/app/client/services/customer-basket.service';
 import { IProduct } from 'src/app/shared/models/iproduct.model';
 
@@ -47,14 +48,18 @@ export class ProductCardComponent implements OnInit {
   }
 
   addItemToBasket(  ) {
+    console.log("addItemToBasket");
     this.Service.addItemToShopingBasket(this.product,  this.quantity);
 
   }
 
   getFaceImageFRomPhotos()
   {
-    return this.product.Images.length>0?this.product.Images[0].Url:"assets/bg-img/0.jpg";
-  }
+    if(this.product.Images)
+        return this.product.Images.length>0?this.product.Images[0].Url:"assets/bg-img/image_1.jpg";
+    else
+         return "assets/bg-img/image_1.jpg"
+    }
   incrementQuantity() {
     this.quantity++;
   }

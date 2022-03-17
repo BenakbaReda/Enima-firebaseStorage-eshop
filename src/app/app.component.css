@@ -8,3 +8,8 @@
   .div_margin{
     margin: 15px;
   }
+
+  .resize {
+    width: 30px;  
+    height: 30px;
+}

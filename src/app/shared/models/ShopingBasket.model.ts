@@ -26,8 +26,17 @@ export class ShopingBasket implements IShopingBasket{
 }
 
 export interface IShopingBasketTotals {
-    shipping: number;
-    subtotal: number;
+    articleTotal: number;
+    delivery: number;
+    code: number;
     total: number;
 }
+ 
+export interface IShopingCode {
+    uuid: string;
+    value: number;
+    end_date: number;
+}
+
+
  

@@ -10,6 +10,11 @@ const routes: Routes = [
   { path:'not-found', component: NotFoundComponent},
   { path:'home', component: HomeComponent},
   {
+    path: 'account',
+    loadChildren: () => import('./shared/modules/account/account.module').then(m => m.AccountModule)
+  },
+
+  {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },

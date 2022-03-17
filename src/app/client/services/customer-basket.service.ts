@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, map } from 'rxjs';
 import { IDeliveryMethod } from 'src/app/shared/models/deliveryMethod.model';
 import { IProduct } from 'src/app/shared/models/iproduct.model';
 import { IShopingBasket, IShopingBasketItem, IShopingBasketTotals, ShopingBasket } from 'src/app/shared/models/ShopingBasket.model';
+import { BaseHttpService } from 'src/app/shared/services/base/base-http.service';
+import { BasketService } from 'src/app/shared/services/Basket/basket.service';
+import { PurchaseCodeService } from 'src/app/shared/services/purchaseCode/purchase-code.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -17,18 +21,54 @@ export class CustomerBasketService {
 
   private _BS_basketTotal = new BehaviorSubject<IShopingBasketTotals>(null);
   O_basketTotal$ = this._BS_basketTotal.asObservable();
+  PurchaseCodeValue = 0;
   shipping = 0;
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient ,
+              private CodeService:PurchaseCodeService,
+              
+              private toastr: ToastrService,
+              private basketService:BasketService  ) { }
 
 
 
-  setShippingPrice(deliveryMethod: IDeliveryMethod) {
+setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.shipping = deliveryMethod.price;
     this.calculateTotals();
 }
 
-  getShopingBasket(uuid: string) {
-    return this.http.get(this.baseUrl + 'shopingbasket?uuid=' + uuid).pipe(
+
+setCodePrice(code: string) {
+   this.CodeService.GetById(code).subscribe(
+     res =>{
+          const dateNow = Date.now();
+          //const targetDate =  dateNow +  (1000  * 60  * 60  * 24  * 10 ); // +10 days
+          if(dateNow <= res.end_date  )
+          {
+            this.PurchaseCodeValue = res.value;
+          }
+          else{
+            this.PurchaseCodeValue = 0;
+            this.toastr.warning("your code is expired ", "Code Info");
+            console.log("your code is expired ")
+          }
+          this.calculateTotals();
+     },
+     err =>
+     {
+      this.PurchaseCodeValue = 0;
+      this.calculateTotals();
+      this.toastr.error("your code is node exist", "Code Error");
+      console.error("your code is node exist")
+     }
+   )
+  
+}
+
+getShopingBasket(uuid: string) {
+
+    return this.basketService.GetById(uuid).pipe(
       map(( basket: IShopingBasket) => {
         this._BS_basket.next(basket);
         this.calculateTotals();
@@ -45,7 +85,7 @@ export class CustomerBasketService {
 
 
   PostShopingBasket(basket: IShopingBasket) {
-    return this.http.post(this.baseUrl + 'shopingbasket', basket).subscribe((response: IShopingBasket) => {
+    return this.basketService.Add(basket).subscribe((response: IShopingBasket) => {
       this._BS_basket.next(response);
       this.calculateTotals();
     }, error => {
@@ -54,7 +94,8 @@ export class CustomerBasketService {
   }
 
   UpdateShopingBasket(basket: IShopingBasket) {
-    return this.http.put(this.baseUrl + 'shopingbasket/' +basket.uuid , basket).subscribe((response: IShopingBasket) => {
+
+    return this.basketService.Update(basket.uuid,basket).subscribe((response: IShopingBasket) => {
       this._BS_basket.next(response);
       this.calculateTotals();
     }, error => {
@@ -62,6 +103,16 @@ export class CustomerBasketService {
     });
   }
 
+  deleteShopingBasket(basket: IShopingBasket) {
+      return this.basketService.Delete(basket.uuid).subscribe(() => {
+          this._BS_basket.next(null);
+          this._BS_basketTotal.next(null);
+          localStorage.removeItem('shopingbasket_uuid');
+        }, error => {
+              console.log(error);
+        }
+        );
+  }
 
   getCurrentShopingBasketValue() {
     return this._BS_basket.value;
@@ -116,18 +167,7 @@ export class CustomerBasketService {
     localStorage.removeItem('shopingbasket_uuid');
 }
 
-  deleteShopingBasket(basket: IShopingBasket) {
-    return this.http
-           .delete(this.baseUrl + 'shopingbasket?uuid=' + basket.uuid)
-           .subscribe(() => {
-                this._BS_basket.next(null);
-                this._BS_basketTotal.next(null);
-                localStorage.removeItem('shopingbasket_uuid');
-           }, error => {
-                    console.log(error);
-          }
-        );
-  }
+
 
 
   private addOrUpdateItem(items: IShopingBasketItem[], itemToAdd: IShopingBasketItem, quantity: number): IShopingBasketItem[] {
@@ -157,17 +197,30 @@ export class CustomerBasketService {
       quantity,
       brand: item.Brand,
       categorie: item.Categorie,
-     
-     
     };
   }
 
+
+  IsCodeShopingBasket(code :string):boolean
+  {
+    return true; 
+  }
+
+  getValueOfCode( code :string)
+  {
+    if(this.IsCodeShopingBasket(code))
+      return 150; 
+    else
+        return 0; 
+  }
   private calculateTotals() {
     const basket = this.getCurrentShopingBasketValue();
-    const shipping = 0;
-    const subtotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
-    const total = subtotal + shipping;
-    this._BS_basketTotal.next({shipping, total, subtotal});
+    const delivery = this.shipping;
+    const code = this.PurchaseCodeValue;
+    const articleTotal = basket.items.reduce((a, b) => (b.price * b.quantity) + a, 0);
+    const totaltmp = articleTotal + delivery-code;
+    const total=totaltmp<0? 0: totaltmp;
+    this._BS_basketTotal.next({articleTotal, delivery , code, total});
   }
 
 

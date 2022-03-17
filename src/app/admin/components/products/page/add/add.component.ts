@@ -169,6 +169,12 @@ export class AddComponent implements OnInit {
  
   }
 
+  _onBackProduct() {
+    this.router.navigate(['admin/products'])
+    
+ 
+  }
+
   _reset() {
     this._dropZonePicker.reset();
 

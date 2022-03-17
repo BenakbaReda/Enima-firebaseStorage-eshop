@@ -1,0 +1,74 @@
+ 
+ 
+    <div        style="min-height: 500px;"   
+                *ngIf="((orders === null) || (orders.length===0))"
+                fxLayoutAlign="center center"   >
+
+            <button  mat-button color ="accent"  style="margin: 10px;"    >
+                There are no orders
+            </button>
+    </div>
+ 
+
+        <div    fxLayout="row wrap" 
+                fxLayoutGap="10px" 
+                class="mat-elevation-z4"  fxFill  *ngIf="((orders != null) && (orders.length>0))">
+       
+        
+    <mat-card   class="div_margin mat-elevation-z4"  fxFlex="70%" > 
+        <mat-card-title>orders </mat-card-title>
+        <mat-card-subtitle>
+            <button  mat-button color ="accent"  style="margin: 10px;">
+                    size  : {{orders.length}}
+            </button>
+        </mat-card-subtitle>
+
+        <mat-card-content>
+          <mat-table   class="container mat-elevation-z8" #table [dataSource]="orders"   class="mat-cell">
+ 
+        
+            <ng-container matColumnDef="Order"  >
+              <mat-header-cell *matHeaderCellDef  >Order</mat-header-cell>
+              <mat-cell *matCellDef="let row"> <strong>
+                          <a
+                              routerLink="/orders/{{ row.id }}"
+                              
+                              >{{ row.id }}</a
+                          ></strong>
+              </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="Date">
+              <mat-header-cell *matHeaderCellDef  >Date</mat-header-cell>
+              <mat-cell *matCellDef="let row">   {{ row.orderDate | date: "medium" }}</mat-cell>
+            </ng-container>
+        
+      
+       
+            <ng-container matColumnDef="Total">
+              <mat-header-cell *matHeaderCellDef  >Total</mat-header-cell>
+              <mat-cell *matCellDef="let row">  <strong>{{row.total} DA</strong></mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="Status">
+              <mat-header-cell *matHeaderCellDef  >Status</mat-header-cell>
+              <mat-cell *matCellDef="let row">  <strong>{{row.status}</strong></mat-cell>
+            </ng-container>
+
+            <!-- actions -->
+     
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+  
+        </mat-card-content>
+         
+      </mat-card>
+
+ 
+    </div>
+ 
+ 
+

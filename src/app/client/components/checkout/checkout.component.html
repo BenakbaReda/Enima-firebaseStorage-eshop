@@ -1,0 +1,137 @@
+<!-- 
+ <div   style="height: 90vh;" fxLayoutAlign="space-around start" >
+
+
+
+  <mat-card  fxLayout="column" fxLayoutAlign="space-around center"   >
+    <mat-card-header>
+      <mat-card-title>checkout  </mat-card-title>
+    </mat-card-header>
+    <mat-card-content     style="height: 80vh;" >
+
+ 
+      <mat-stepper class="example-stepper"   [orientation]="(O_stepperOrientation | async)!" >
+          
+        <mat-step [stepControl]="addressForm" appearance="outline"
+                  label="Adress">
+                  <div>
+               <app-checkout-adress  [addressForm]="addressForm" ></app-checkout-adress>
+            
+               <div  fxLayout="row wrap" fxLayoutAlign="space-around center"   fxLayoutGap="25px"     > 
+                <button   mat-button color="accent"    routerLink="/shopingBascket">
+                  <mat-icon> navigate_before </mat-icon>
+                  Back to Basket
+                </button>
+                  <button mat-button color="accent"    matStepperNext>
+                     Go to Delivery  
+                    <mat-icon> navigate_next </mat-icon>   
+                 
+                </button>
+
+               </div>
+         
+            
+      
+
+              </div>
+      
+        </mat-step>
+         
+        <mat-step [stepControl]="deliveryForm"  label="delivery">
+            <div>
+              <app-checkout-delivery  [deliveryForm]="deliveryForm" ></app-checkout-delivery>
+              <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                  <button mat-button color="accent"   matStepperPrevious>
+                      <mat-icon> navigate_before </mat-icon>
+                      Back</button>
+                  <button mat-button color="accent"   matStepperNext>
+                      Next
+                      <mat-icon> navigate_next </mat-icon> 
+                  </button>
+              </div>
+            </div>
+        </mat-step>
+ 
+
+        <mat-step [stepControl]="deliveryForm"  label="delivery mode ">
+          <div>
+            <app-delivery-mode  ></app-delivery-mode>
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+                <button mat-button color="accent"   matStepperPrevious>
+                    <mat-icon> navigate_before </mat-icon>
+                    Back</button>
+                <button mat-button color="accent"   matStepperNext>
+                    Next
+                    <mat-icon> navigate_next </mat-icon> 
+                </button>
+            </div>
+          </div>
+      </mat-step>
+
+
+
+        <mat-step [stepControl]="paymentForm" label="payment">
+            <div >
+                <app-checkout-payement  [paymentForm]="paymentForm" ></app-checkout-payement>
+                <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxFill>
+                    <button mat-button color="accent"   matStepperPrevious>
+                      <mat-icon> navigate_before </mat-icon>
+                      Back</button>
+                    <button mat-raised-button color="accent"   >
+                      done
+                      <mat-icon> done </mat-icon>
+                    </button>
+              </div>
+          </div>  
+        </mat-step>
+      </mat-stepper>
+    </mat-card-content>
+</mat-card>
+</div>
+  
+  -->
+  <div  fxLayout="column" style="margin: 25px;"    >
+    <mat-toolbar  fxLayoutAlign="space-between center"  >
+      <button mat-mini-fab  
+      [color]="colorBefore"   
+      (mouseover)="colorBefore = 'primary'" 
+      (mouseout)="colorBefore = 'accent'"
+      
+      (click)="goBack(stepper)" [disabled]="stepper.selectedIndex === 0">
+        <mat-icon> navigate_before    </mat-icon>
+      </button> 
+        <!-- <button  mat-button  color="accent" >Product ID : {{data.uuid}}</button> -->
+        <button    mat-mini-fab 
+        
+      [color]="colorNext"   
+      (mouseover)="colorNext = 'primary'" 
+      (mouseout)="colorNext = 'accent'"
+      
+        (click)="goForward(stepper)" 
+        [disabled]="stepper.selectedIndex === stepper.steps.length-1"  >
+            <mat-icon> navigate_next  </mat-icon>
+       </button>
+       
+      
+    </mat-toolbar>
+
+    <mat-stepper #stepper class="example-stepper"   [orientation]="(O_stepperOrientation | async)!">
+      <mat-step label="Delivery">
+        <div>
+          <app-delivery-mode  ></app-delivery-mode>
+        </div>
+      </mat-step>
+      <mat-step label="payment"> 
+       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro magnam consectetur laudantium ea impedit! Esse laboriosam sit iusto perferendis suscipit similique fugiat assumenda, iste magni, beatae eveniet vero non dolor!
+      </mat-step>
+      <mat-step label="done"> 
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur exercitationem possimus nihil, totam aliquid aut explicabo, consectetur incidunt, dicta debitis error. Numquam dignissimos blanditiis laborum ea eligendi omnis doloribus pariatur.
+      </mat-step>
+    </mat-stepper>
+  
+ 
+    <div>
+ 
+ 
+   
+ 

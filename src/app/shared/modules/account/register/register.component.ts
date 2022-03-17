@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { map, of, switchMap, timer } from 'rxjs';
 import { IUser, IUserRegister, IUserRegisterResponse } from 'src/app/shared/models/iuser.model';
-import { AccountService } from 'src/app/shared/services/api/account/account.service';
+import { AccountService } from 'src/app/shared/services/account/account.service';
+ 
 
  
 
