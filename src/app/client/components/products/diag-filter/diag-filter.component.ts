@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { IBrand } from 'src/app/shared/models/ibrand.model';
-import { ICategorie } from 'src/app/shared/models/icategorie.model';
-import { IProductFilter, ISteperFilter } from 'src/app/shared/models/iproduct.model';
-import { BrandService } from 'src/app/shared/services/brand/brand.service';
-import { CategorieService } from 'src/app/shared/services/categorie/categorie.service';
+import { IBrand } from 'src/app/shared/models/api/ibrand.model';
+import { ICategorie } from 'src/app/shared/models/api/icategorie.model';
+import { IProductFilter, ISteperFilter } from 'src/app/shared/models/iproductFilter.model';
+import { BrandService } from 'src/app/shared/services/api/brand.service';
+import { CategorieService } from 'src/app/shared/services/api/categorie.service';
 
 
 const DIAG_CONST_STEPPER_MIN=0 ;

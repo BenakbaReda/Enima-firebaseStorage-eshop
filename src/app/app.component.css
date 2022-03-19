@@ -13,3 +13,13 @@
     width: 30px;  
     height: 30px;
 }
+
+
+.example-footer {
+ 
+  border-radius: 15px;
+  margin-top: 5px;
+  height: 300px;
+  text-align: center;
+  
+}

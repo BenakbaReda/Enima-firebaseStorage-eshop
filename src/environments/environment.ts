@@ -33,6 +33,8 @@ export const environment = {
     
     Tablebasket:"shopingbasket",
     TableCode:"PurchaseCode",
+    TableCommune:"Commune",
+    TableWilaya:"Wilaya",
   },
 
   account: {

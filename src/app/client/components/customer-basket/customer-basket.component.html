@@ -1,5 +1,5 @@
- 
-<div class="container"  fxLayoutAlign="center center" >
+<!--  
+<div   fxLayoutAlign="center center" fxFlexFill >
 
   <div    *ngIf="((O_basket$ | async) === null) || ((O_basket$ | async).items.length==0)" 
            >
@@ -14,7 +14,7 @@
   <div     *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)"     
             fxLayout="row wrap"     > 
 
-    <mat-card   class="div_margin mat-elevation-z4"  fxFlex  > 
+    <mat-card   class="div_margin"  fxFlex  > 
       <mat-card-title>baskcet </mat-card-title>
       <mat-card-subtitle><button  mat-button color ="accent"  style="margin: 10px;"    >
         ID  : {{(O_basket$ | async).uuid}}
@@ -83,7 +83,7 @@
     </mat-card>
  
     
-    <mat-card class="div_margin mat-elevation-z8" fxFlex="25" > 
+    <mat-card class="div_margin" fxFlex="25" > 
       <mat-card-title>Order Summary </mat-card-title>
       <mat-card-subtitle>Shipping costs will be added depending on choices made during checkout</mat-card-subtitle>
 
@@ -150,7 +150,150 @@
  
   </div>
  
+</div> -->
+
+
+ 
+
+<div    *ngIf="((O_basket$ | async) === null) || ((O_basket$ | async).items.length==0)" 
+           >
+    
+    <button  mat-button color ="accent"  style="margin: 10px;"    >
+      There are no items in your basket
+    </button>
 </div>
 
+ 
+<div   *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)"   fxLayout="column" style="margin: 25px;"   >
+  <mat-toolbar  fxLayoutAlign="space-between center"  >
 
+    <button     mat-mini-fab 
+                [color]="colorAdd"   
+                (mouseover)="colorAdd = 'primary'" 
+                (mouseout) ="colorAdd = 'accent'"
+                [routerLink]="['/client/products']">
+      <mat-icon> arrow_back   </mat-icon>
+    </button> 
+
+      <button   mat-button  color="accent" >Basket  ID : {{(O_basket$ | async).uuid}}</button>
+      <button mat-mini-fab    aria-label="delete Product"  
+      [color]="colorAdd"   
+      (mouseover)="colorAdd = 'primary'" 
+      (mouseout) ="colorAdd = 'accent'"
+      [routerLink]="['/client/checkout']"  >
+          <mat-icon> check_circle  </mat-icon>
+      </button>
+  </mat-toolbar>
+  <div    fxLayout="row wrap" fxLayoutAlign="space-around   center">
+    <div fxLayout="column"  style="margin: 25px;"     fxFlex="45">
+        <mat-toolbar  d fxLayoutAlign="space-around center"  >
+          <span>product basket  :</span>
+        </mat-toolbar>
+        <mat-table    #table [dataSource]="(O_basket$ | async).items"   >
+          <ng-container matColumnDef="image">
+            <mat-header-cell *matHeaderCellDef  >Image</mat-header-cell>
+            <mat-cell *matCellDef="let row"  style="margin-top: 10px;">
+              
+              <img mat-card-image class="imgs"    src="{{row.image}}" alt="Photo of {{row.Name}}"   [routerLink]="['/products',row.id]">
+              
+              </mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="productName">
+            <mat-header-cell *matHeaderCellDef  >productName</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.productName}}</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef  >price</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.price}} DA</mat-cell>
+          </ng-container>
+      
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef  >quantity</mat-header-cell>
+            <mat-cell *matCellDef="let row"> 
+              <div  style="display: flex; flex-direction: row; justify-content:center; justify-items: center" >
+                  <button mat-icon-button color ="accent"   (click)="decrementItemQuantity(row)" >
+                    <mat-icon> remove_circle_outline </mat-icon>
+                  </button>
+                  <mat-form-field  style="max-width: 50px; text-align: center;"  >
+                    <input matInput type="number" placeholder="quantity" [(ngModel)]="row.quantity" >
+                  </mat-form-field>
+                  <button mat-icon-button color ="accent"   (click)="incrementItemQuantity(row)"  >
+                    <mat-icon> add_circle_outline  </mat-icon>
+                  </button>
+              </div>
+              
+             </mat-cell>
+          </ng-container>
+     
+          <ng-container matColumnDef="total">
+            <mat-header-cell *matHeaderCellDef  >Total</mat-header-cell>
+            <mat-cell *matCellDef="let row">  <strong>{{row.price * row.quantity}} DA</strong></mat-cell>
+          </ng-container>
+         
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> actions</mat-header-cell>
+      
+            <mat-cell *matCellDef="let row; let i=index;">
+              <button mat-icon-button color="warn" (click)="removeBasketItem(row)">
+                <mat-icon aria-label="delete">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+      
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </div>
+    <div fxLayout="column"   style="margin: 25px;"     fxFlex="45">
+        <mat-toolbar    >
+          <span>Order Summary  :</span>
+          
+        </mat-toolbar>
+          <p>Shipping costs will be added depending on choices made during checkout</p>
+        <div  fxLayout="column"      >
+          <div fxLayout="row wrap"  fxLayoutAlign="space-between center" >
+            <button  mat-button color ="accent"   >
+             total arcticle
+            </button>
+            <button  mat-button    color ="primary" >
+              {{(O_basketTotal$ | async).articleTotal}} DA
+            </button>
+          </div>
+          <mat-divider></mat-divider>
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center" >
+            <button  mat-button color ="accent"        >
+              Shipping & handling
+            </button>
+            <button mat-button color ="primary"      >{{(O_basketTotal$ | async).delivery }}</button>
+          </div>
+          <mat-divider></mat-divider>
+          <br>
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center"  >
+            <mat-form-field appearance="outline" color="accent">
+              <mat-label>your code </mat-label>
+              <input matInput placeholder="Placeholder"  type="string"      [(ngModel)]="codePromo"   >
+              <mat-icon matSuffix>grain </mat-icon>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap"  fxLayoutAlign="space-between center"   >
+            <button  mat-raised-button color ="accent" (click)="setPurchaseCode()"   >  ok   </button>
+             <button mat-button color ="primary"      >{{(O_basketTotal$ | async).code }}</button>
+          </div>
+          <br>
+          <br>
+          <mat-divider ></mat-divider>
+          <div fxLayout="row wrap" fxLayoutAlign="space-between center"  >
+            <button  mat-button color ="accent"    style="width:120px ; text-align: left;"    >
+              Total
+            </button>
+            <button  mat-button color ="primary"     >{{(O_basketTotal$ | async).total }} DA</button>
+          </div>
+        </div>
+ 
+    </div>
+  </div>
   
+</div>
+

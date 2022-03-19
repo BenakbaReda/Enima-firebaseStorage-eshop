@@ -3,8 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IProduct, IProductFilter } from 'src/app/shared/models/iproduct.model';
-import { ProductService } from 'src/app/shared/services/product/product.service';
+import { IProduct } from 'src/app/shared/models/api/iproduct.model';
+import {  IProductFilter } from 'src/app/shared/models/iproductFilter.model';
+import { ProductService } from 'src/app/shared/services/api/product.service';
 import { DiagFilterComponent,
    DIAG_CONST_FILTRE_BRAND_ALL_VALUE, 
    DIAG_CONST_FILTRE_CATEGORIE_ALL_VALUE } from './diag-filter/diag-filter.component';

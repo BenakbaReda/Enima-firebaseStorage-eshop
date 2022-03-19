@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
-import { IImage, IProduct } from 'src/app/shared/models/iproduct.model';
+ 
 import { StorageImagesService } from 'src/app/admin/services/storage/storage-images.service';
-import {  ProductService } from 'src/app/shared/services/product/product.service';
+import { IImage, IProduct } from 'src/app/shared/models/api/iproduct.model';
+import {  ProductService } from 'src/app/shared/services/api/product.service';
 
 @Component({
   selector: 'app-del',
@@ -12,6 +13,9 @@ import {  ProductService } from 'src/app/shared/services/product/product.service
   styleUrls: ['./del.component.css']
 })
 export class DelComponent implements OnInit {
+
+  colorAdd = "accent";
+  colorDetail = "accent";
 
   data: IProduct; 
   uuid:string =""; 
@@ -85,8 +89,11 @@ deleteProduct()
 
  }
 
+ _onBackProduct() {
+  this.router.navigate(['admin/products'])
+  
 
- //isUseDeleteFromList=false;
+}
 /**
  * 
  * @param imageDTO 

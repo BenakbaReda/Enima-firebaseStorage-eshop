@@ -25,6 +25,8 @@
     "@angular/router": "~13.2.1",
     "@ngneat/hot-toast": "^4.1.0",
     "@types/aos": "^3.0.4",
+    "angular-font-awesome": "^3.1.2",
+    "angular-material-icons": "^0.7.1",
     "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "faker": "^5.5.3",

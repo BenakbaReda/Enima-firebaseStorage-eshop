@@ -8,7 +8,8 @@ import { IUser, IUserLogin, IUserLoginResponse, IUserRegister } from 'src/app/sh
  
  
 import { environment } from 'src/environments/environment';
-import { BaseHttpService } from '../base/base-http.service';
+import { BaseHttpService } from '../api/base/base-http.service';
+ 
  
 const API_USERS_NAME:string    = 'users/';
 const API_LOGIN_NAME:string    = 'login';

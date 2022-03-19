@@ -8,12 +8,13 @@ import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs';
 import { UploadTask } from 'src/app/admin/models/upload.model';
 import { StorageImagesService } from 'src/app/admin/services/storage/storage-images.service';
-import { IBrand } from 'src/app/shared/models/ibrand.model';
-import { ICategorie } from 'src/app/shared/models/icategorie.model';
-import { IImage, IProduct } from 'src/app/shared/models/iproduct.model';
-import { BrandService } from 'src/app/shared/services/brand/brand.service';
-import { CategorieService } from 'src/app/shared/services/categorie/categorie.service';
-import { ProductService } from 'src/app/shared/services/product/product.service';
+import { IBrand } from 'src/app/shared/models/api/ibrand.model';
+import { ICategorie } from 'src/app/shared/models/api/icategorie.model';
+import { IImage, IProduct } from 'src/app/shared/models/api/iproduct.model';
+ 
+import { BrandService } from 'src/app/shared/services/api/brand.service';
+import { CategorieService } from 'src/app/shared/services/api/categorie.service';
+import { ProductService } from 'src/app/shared/services/api/product.service';
 
 
 export interface IUpdateImage  {
@@ -34,6 +35,9 @@ export interface IUpdateImage  {
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
+
+  colorAdd = "accent";
+  colorDetail = "accent";
 
   data: IProduct; 
   Images     :IUpdateImage [] =[] ;
@@ -207,13 +211,11 @@ onFileSelected(event) {
       this.toastr.error(" the max images in product must be less then 6 ", "error files ")
     }
   }
-
-   
- 
-  
-
 }
  
+_onBackProduct() {
+  this.router.navigate(['admin/products'])
+}
 
 onDeleteImage( elm:IUpdateImage): void {
   try {
@@ -306,6 +308,7 @@ UploadImages() {
 
     if((nbrToAddOrUpdate ==0 ) && (nbrToDeleted==0)){
       this.toastr.info("no image to updating or to add or to delete   ", "uploading")
+      this.saveProduct();
       this.router.navigate(['admin/products'])  
       return 
     }

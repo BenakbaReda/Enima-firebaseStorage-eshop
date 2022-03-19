@@ -1,0 +1,252 @@
+<div fxLayout="row" *ngIf="isRow" >
+   
+    <!--  menu navigation  -->
+    <div fxLayout="row"       >  
+      <div  class="div_margin" >
+          <button mat-button color="accent" [routerLink]="['home']"  matTooltip="home page"      >
+              <mat-icon> home </mat-icon>
+          </button>
+      </div>
+      <div  class="div_margin"  >
+          <button mat-button color="accent" [routerLink]="['/admin/products']"  matTooltip="admin page"    >
+              <mat-icon> settings </mat-icon>
+          </button>
+      </div>
+
+      <div    class="div_margin"   >
+          <button mat-button color="accent" [routerLink]="['/client/products']"  matTooltip="products page"    >
+              <mat-icon> store </mat-icon>
+          </button>
+      </div>
+
+      <div  class="div_margin" >
+          <button mat-button color="accent" [routerLink]="['/contact']"  matTooltip="contact page"    >
+              <mat-icon> contact_mail </mat-icon>
+          </button>
+      </div>
+
+
+      <div  class="div_margin"   >
+          <div    *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)"  >
+              <button mat-icon-button color="accent" 
+                [routerLink]="['/client/basket']"  
+                matTooltip="basket page"    > 
+                  <mat-icon matBadge="{{(O_basket$ | async).items.length}}" 
+                  matBadgeColor="primary"> shopping_basket </mat-icon>
+              </button>
+          </div> 
+      </div> 
+
+
+      <div  class="div_margin"   >
+          <button mat-button color="accent"   matTooltip="change theme application"     [matMenuTriggerFor]="menu"   >
+              <mat-icon> brush </mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+              <button *ngFor="let option of options"  mat-menu-item  (click)="themeChangeHandler(option.value)" >
+              <mat-icon role="img"  svgicon="theme-example" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg"   xmlns:xlink="http://www.w3.org/1999/xlink" 
+                    width="100%"   height="100%"  viewBox="0 0 80 80"   fit=""   preserveAspectRatio="xMidYMid meet"   focusable="false">
+                  <defs>
+                      <path d="M77.87 0C79.05 0 80 .95 80 2.13v75.74c0 1.17-.95 2.13-2.13 2.13H2.13C.96 80 0 79.04 0 77.87V2.13C0 .95.96 0 2.13 0h75.74z" id="a"> </path>
+                      <path d="M54 40c3.32 0 6 2.69 6 6 0 1.2 0-1.2 0 0 0 3.31-2.68 6-6 6H26c-3.31 0-6-2.69-6-6 0-1.2 0 1.2 0 0 0-3.31 2.69-6 6-6h28z"  id="b"> </path>
+                      <path d="M0 0h80v17.24H0V0z" id="c"></path>
+                  </defs>
+                  <use xlink:href="#a" [attr.fill]="option.backgroundColor"></use>
+                  <use xlink:href="#b" [attr.fill]="option.buttonColor"></use>
+                  <use xlink:href="#c" [attr.fill]="option.headingColor"></use>
+              </svg>
+              </mat-icon>
+              <span>{{ option.label }}</span>
+          </button>
+          </mat-menu>
+
+      </div>
+
+
+
+    </div>
+
+
+     <!--  menu profile -->
+    <div   *ngIf="currentUser$ | async as currentUser"  >
+      <button mat-icon-button   [matMenuTriggerFor]="menu"   >
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon color="accent">more_vert</mat-icon>
+            <img   mat-card-avatar  class="resize"   src ="./../../../../../assets/profile.svg"/>
+          </div>
+    </button>
+  
+    <mat-menu #menu="matMenu"  >
+      <button mat-menu-item  >
+        <mat-icon color="accent"> account_circle </mat-icon>
+        <span>{{ currentUser.email }}</span>
+    </button> 
+      <br>
+      <mat-divider ></mat-divider>
+        <button mat-menu-item  [routerLink]="['/basket']" 
+                *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)" >
+                <mat-icon color="accent"> shopping_cart</mat-icon>  
+              <span matBadge="{{(O_basket$ | async).items.length}}"  matBadgeOverlap="false"  matBadgeColor="accent" >View Basket</span>
+        </button>
+        <button mat-menu-item  [routerLink]="['/basket']" 
+                *ngIf="((O_basket$ | async) === null)" >
+  
+            <mat-icon   color="accent"> shopping_cart</mat-icon>  
+            <span matBadge="0" matBadgeColor="accent"  matBadgeOverlap="false" >View Basket</span>
+        </button>
+      <mat-divider ></mat-divider>
+      <button mat-menu-item    [routerLink]="['/orders']" >
+          <mat-icon  color="accent"> playlist_add_check</mat-icon>  
+          <span>View Orders</span>
+      </button>
+      <mat-divider ></mat-divider>
+      <button mat-menu-item   (click)="loginOut()">
+        <mat-icon color="accent"> exit_to_app</mat-icon>Logout
+      </button> 
+      <mat-divider ></mat-divider>
+      <button mat-menu-item   >
+        <mat-icon color="accent"> style </mat-icon>theme
+      </button> 
+    </mat-menu>
+  </div>
+
+  
+     <!--  menu account -->
+    <div fxLayout="row"     *ngIf="(currentUser$ | async) === null"   >  
+      <div  class="div_margin" >
+          <button mat-raised-button color="accent" [routerLink]="['/account/login']"    fxFill   >Login</button>
+      </div>
+      <div  class="div_margin" >
+          <button mat-raised-button color="accent" [routerLink]="['/account/register']"  fxFill >register</button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div fxLayout="column" *ngIf="!isRow" >
+   
+    <!--  menu navigation  -->
+    <div fxLayout="column"       >  
+      <div  class="div_margin" >
+          <button mat-button color="accent" [routerLink]="['home']"  matTooltip="home page"      >
+              <mat-icon> home </mat-icon>
+          </button>
+      </div>
+      <div  class="div_margin"  >
+          <button mat-button color="accent" [routerLink]="['/admin/products']"  matTooltip="admin page"    >
+              <mat-icon> settings </mat-icon>
+          </button>
+      </div>
+
+      <div    class="div_margin"   >
+          <button mat-button color="accent" [routerLink]="['/client/products']"  matTooltip="products page"    >
+              <mat-icon> store </mat-icon>
+          </button>
+      </div>
+
+      <div  class="div_margin" >
+          <button mat-button color="accent" [routerLink]="['/contact']"  matTooltip="contact page"    >
+              <mat-icon> contact_mail </mat-icon>
+          </button>
+      </div>
+
+
+      <div  class="div_margin"   >
+          <div    *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)"  >
+              <button mat-icon-button color="accent" 
+                [routerLink]="['/client/basket']"  
+                matTooltip="basket page"    > 
+                  <mat-icon matBadge="{{(O_basket$ | async).items.length}}" 
+                  matBadgeColor="primary"> shopping_basket </mat-icon>
+              </button>
+          </div> 
+      </div> 
+
+
+      <div  class="div_margin"   >
+          <button mat-button color="accent"   matTooltip="change theme application"     [matMenuTriggerFor]="menu"   >
+              <mat-icon> brush </mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+              <button *ngFor="let option of options"  mat-menu-item  (click)="themeChangeHandler(option.value)" >
+              <mat-icon role="img"  svgicon="theme-example" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg"   xmlns:xlink="http://www.w3.org/1999/xlink" 
+                    width="100%"   height="100%"  viewBox="0 0 80 80"   fit=""   preserveAspectRatio="xMidYMid meet"   focusable="false">
+                  <defs>
+                      <path d="M77.87 0C79.05 0 80 .95 80 2.13v75.74c0 1.17-.95 2.13-2.13 2.13H2.13C.96 80 0 79.04 0 77.87V2.13C0 .95.96 0 2.13 0h75.74z" id="a"> </path>
+                      <path d="M54 40c3.32 0 6 2.69 6 6 0 1.2 0-1.2 0 0 0 3.31-2.68 6-6 6H26c-3.31 0-6-2.69-6-6 0-1.2 0 1.2 0 0 0-3.31 2.69-6 6-6h28z"  id="b"> </path>
+                      <path d="M0 0h80v17.24H0V0z" id="c"></path>
+                  </defs>
+                  <use xlink:href="#a" [attr.fill]="option.backgroundColor"></use>
+                  <use xlink:href="#b" [attr.fill]="option.buttonColor"></use>
+                  <use xlink:href="#c" [attr.fill]="option.headingColor"></use>
+              </svg>
+              </mat-icon>
+              <span>{{ option.label }}</span>
+          </button>
+          </mat-menu>
+
+      </div>
+
+
+
+    </div>
+
+
+     <!--  menu profile -->
+    <div   *ngIf="currentUser$ | async as currentUser"  >
+      <button mat-icon-button   [matMenuTriggerFor]="menu"   >
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon color="accent">more_vert</mat-icon>
+            <img   mat-card-avatar  class="resize"   src ="./../../../../../assets/profile.svg"/>
+          </div>
+    </button>
+  
+    <mat-menu #menu="matMenu"  >
+      <button mat-menu-item  >
+        <mat-icon color="accent"> account_circle </mat-icon>
+        <span>{{ currentUser.email }}</span>
+    </button> 
+      <br>
+      <mat-divider ></mat-divider>
+        <button mat-menu-item  [routerLink]="['/basket']" 
+                *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)" >
+                <mat-icon color="accent"> shopping_cart</mat-icon>  
+              <span matBadge="{{(O_basket$ | async).items.length}}"  matBadgeOverlap="false"  matBadgeColor="accent" >View Basket</span>
+        </button>
+        <button mat-menu-item  [routerLink]="['/basket']" 
+                *ngIf="((O_basket$ | async) === null)" >
+  
+            <mat-icon   color="accent"> shopping_cart</mat-icon>  
+            <span matBadge="0" matBadgeColor="accent"  matBadgeOverlap="false" >View Basket</span>
+        </button>
+      <mat-divider ></mat-divider>
+      <button mat-menu-item    [routerLink]="['/orders']" >
+          <mat-icon  color="accent"> playlist_add_check</mat-icon>  
+          <span>View Orders</span>
+      </button>
+      <mat-divider ></mat-divider>
+      <button mat-menu-item   (click)="loginOut()">
+        <mat-icon color="accent"> exit_to_app</mat-icon>Logout
+      </button> 
+      <mat-divider ></mat-divider>
+      <button mat-menu-item   >
+        <mat-icon color="accent"> style </mat-icon>theme
+      </button> 
+    </mat-menu>
+  </div>
+
+  
+     <!--  menu account -->
+    <div fxLayout="column"     *ngIf="(currentUser$ | async) === null"   >  
+      <div  class="div_margin" >
+          <button mat-raised-button color="accent" [routerLink]="['/account/login']"    fxFill   >Login</button>
+      </div>
+      <div  class="div_margin" >
+          <button mat-raised-button color="accent" [routerLink]="['/account/register']"  fxFill >register</button>
+      </div>
+    </div>
+
+  </div>

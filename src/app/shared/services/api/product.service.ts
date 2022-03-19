@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IProduct } from 'src/app/shared/models/iproduct.model';
+ 
 import { environment } from 'src/environments/environment';
-import { DataHttpService } from '../base/data-http.service';
+import { IProduct } from '../../models/api/iproduct.model';
+import { DataHttpService } from './base/data-http.service';
  
  
 

@@ -17,12 +17,12 @@ export class HomeComponent implements OnInit {
   constructor(  ) {}
  
   ngOnInit(): void {
-    AOS.init({
-      debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
-      duration: 1500,
-      once: false, // whether animation should happen only once - while scrolling down
-      mirror: true, // whether elements should animate out while scrolling past them
-    });
+    // AOS.init({
+    //   debounceDelay: 50,  
+    //   duration: 1500,
+    //   once: false,  
+    //   mirror: true,  
+    // });
  
   }
    

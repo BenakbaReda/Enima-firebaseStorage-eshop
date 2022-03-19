@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ConnectableObservable } from 'rxjs';
+ 
 import { CustomerBasketService } from 'src/app/client/services/customer-basket.service';
-import { IProduct } from 'src/app/shared/models/iproduct.model';
+import { IProduct } from 'src/app/shared/models/api/iproduct.model';
+ 
 
 @Component({
   selector: 'app-product-card',
@@ -14,7 +15,7 @@ export class ProductCardComponent implements OnInit {
   colorDetail = "accent";
   quantity = 1;
   @Input()  product:IProduct ; 
-  @Input()  seletedAnimation:string ; 
+  seletedAnimation:string="animate__animated  animate__heartBeat  animate__slower animate__infinite" ; 
 
 
 
@@ -53,25 +54,28 @@ export class ProductCardComponent implements OnInit {
 
   }
 
-  getFaceImageFRomPhotos()
+  getDisplayImageFromProduct()
   {
-    if(this.product.Images)
+    if(!this.product.Images)
+       return "assets/bg-img/image_1.jpg"
+    if(this.product.Images.length>0)
         return this.product.Images.length>0?this.product.Images[0].Url:"assets/bg-img/image_1.jpg";
     else
          return "assets/bg-img/image_1.jpg"
-    }
-  incrementQuantity() {
-    this.quantity++;
-  }
+}
 
-  decrementQuantity() {
-    if (this.quantity > 1)
-    {
-      this.quantity--;
-    }
+incrementQuantity() {
+  this.quantity++;
+}
+
+decrementQuantity() {
+  if (this.quantity > 1)
+  {
+    this.quantity--;
   }
+}
  
- getanimation()
+getanimation()
  {
        return   this.seletedAnimation ;
 

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ICategorie } from 'src/app/shared/models/icategorie.model';
+import { ICategorie } from 'src/app/shared/models/api/icategorie.model';
 import { environment } from 'src/environments/environment';
-import { DataHttpService } from '../base/data-http.service';
+import { DataHttpService } from './base/data-http.service';
  
  
  

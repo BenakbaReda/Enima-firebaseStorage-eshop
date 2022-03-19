@@ -3,14 +3,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { ProductService } from 'src/app/shared/services/product/product.service';
-import { IProduct } from '../../../shared/models/iproduct.model';
+import { ProductService } from 'src/app/shared/services/api/product.service';
+ 
 import { AdddiagComponent } from './diag/adddiag/adddiag.component';
 import { DeldiagComponent } from './diag/deldiag/deldiag.component';
 import { EditdiagComponent } from './diag/editdiag/editdiag.component';
 import { ExtentionDataSource } from './extention-data-source';
 import * as uuid from 'uuid';
 import { fromEvent } from 'rxjs';
+import { IProduct } from 'src/app/shared/models/api/iproduct.model';
 
 
 @Component({

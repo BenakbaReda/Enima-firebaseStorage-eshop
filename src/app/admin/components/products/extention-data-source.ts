@@ -2,8 +2,9 @@ import { DataSource } from "@angular/cdk/collections";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { BehaviorSubject, map, merge, Observable } from "rxjs";
-import {  ProductService } from "src/app/shared/services/product/product.service";
-import { IProduct } from "../../../shared/models/iproduct.model";
+import { IProduct } from "src/app/shared/models/api/iproduct.model";
+import {  ProductService } from "src/app/shared/services/api/product.service";
+ 
 
 
 

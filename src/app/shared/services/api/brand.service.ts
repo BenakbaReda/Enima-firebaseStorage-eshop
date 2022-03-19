@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IBrand } from 'src/app/shared/models/ibrand.model';
+import { IBrand } from 'src/app/shared/models/api/ibrand.model';
 import { environment } from 'src/environments/environment';
-import { BaseHttpService } from '../base/base-http.service';
+import { BaseHttpService } from './base/base-http.service';
  
  
 @Injectable({

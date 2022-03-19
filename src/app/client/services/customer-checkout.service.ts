@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IDeliveryMethod } from 'src/app/shared/models/deliveryMethod.model';
-import { IOrderToCreate } from 'src/app/shared/models/order.model';
+import { IOrderToCreate } from 'src/app/shared/models/api/order.model';
 import { environment } from 'src/environments/environment';
  
  

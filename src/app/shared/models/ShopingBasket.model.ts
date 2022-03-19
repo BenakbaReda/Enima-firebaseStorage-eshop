@@ -1,24 +1,12 @@
 import {v4 as uuidv4} from 'uuid';
+import { IShopingBasket, IShopingBasketItem } from './api/Basket.model';
 
 export interface IAnimation {
     uuid: string;
     Name: string ;
 }
 
-export interface IShopingBasket {
-    uuid: string;
-    items: IShopingBasketItem[];
-}
-
-export interface IShopingBasketItem {
-    uuid: string;
-    productName: string;
-    price: number;
-    quantity: number;
-    image: string;
-    brand: string;
-    categorie: string;
- }
+ 
 
 export class ShopingBasket implements IShopingBasket{
     uuid: string = uuidv4();
@@ -32,11 +20,4 @@ export interface IShopingBasketTotals {
     total: number;
 }
  
-export interface IShopingCode {
-    uuid: string;
-    value: number;
-    end_date: number;
-}
-
-
  

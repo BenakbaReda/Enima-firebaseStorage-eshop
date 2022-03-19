@@ -31,7 +31,7 @@ import { OrdersModule } from './components/orders/orders.module';
 
 @NgModule({
   declarations: [
-    ClientComponent
+    ClientComponent, 
   ],
   imports: [
     CommonModule,
@@ -46,7 +46,7 @@ import { OrdersModule } from './components/orders/orders.module';
     OrdersModule,
   ],
   exports:[
-    ClientComponent,
+    ClientComponent, 
   ]
 })
 export class ClientModule { }

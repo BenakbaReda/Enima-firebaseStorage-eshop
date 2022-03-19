@@ -1,4 +1,4 @@
-import { IAddress } from './address.model';
+import { IAddress } from '../address.model';
 
 export interface IOrderToCreate {
     basketId: string;

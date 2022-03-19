@@ -1,18 +1,18 @@
- 
-<mat-card class="example-card"     appMaterialElevator  [defaultElevation]="2" [raisedElevation]="16"     >
+<!--  
+<mat-card class="main-card"     appMaterialElevator  [defaultElevation]="2" [raisedElevation]="16"     >
     <mat-card-header>
         <img  mat-card-avatar   class="example-header-image"  src="{{product.Images[0].Url}}" alt="Photo of {{product.Name}}">
         <mat-card-title >
             
             <button mat-button    color="accent" class="mat-card-button"   > {{product.Price}} DA </button>
          </mat-card-title> 
-        <!-- <mat-card-subtitle>{{product.Name}}   </mat-card-subtitle> -->
+        <mat-card-subtitle>{{product.Name}}   </mat-card-subtitle>  
         <mat-card-subtitle>Code uuid : {{product.uuid}} </mat-card-subtitle> 
         <mat-card-subtitle>Code   cat : {{product.Categorie}} </mat-card-subtitle>
         <mat-card-subtitle>Code brand : {{product.Brand}} </mat-card-subtitle>
     </mat-card-header>
     <img mat-card-image class="imgs"   
-                        src="{{getFaceImageFRomPhotos()}}" 
+                        src="{{getDisplayImageFromProduct()}}" 
                         alt="Photo of {{product.Name}}" 
                         [routerLink]="['/products',product.uuid]">
     <mat-card-content [routerLink]="['/products',product.uuid]">
@@ -60,6 +60,81 @@
                             [color]="colorAdd"   
                             (mouseover)="colorAdd = 'primary'" (click)="addItemToBasket()"   matTooltip="add the product to basket" 
                             (mouseout) ="colorAdd = 'accent'">
+                            <mat-icon>add_shopping_cart</mat-icon>
+            </button>
+       
+          </div>
+
+      
+    </mat-card-actions>
+</mat-card>
+  -->
+
+   
+<mat-card class="main-card"     appMaterialElevator  [defaultElevation]="2" [raisedElevation]="16"     >
+    <mat-card-header>
+        <img  mat-card-avatar   class="main-header-image"  src="{{getDisplayImageFromProduct()}}" alt="Photo of {{product.Name}}">
+        <mat-card-title >
+            
+            <button mat-button  [class]="getanimation()" color="accent" class="mat-card-button"   > {{product.Price}} DA </button>
+         </mat-card-title> 
+       <mat-card-subtitle>{{product.Name}}   </mat-card-subtitle>  
+        <mat-card-subtitle>Code   cat : {{product.Categorie}} </mat-card-subtitle>
+        <mat-card-subtitle>Code brand : {{product.Brand}} </mat-card-subtitle> 
+    </mat-card-header>
+
+    <mat-card-content [routerLink]="['/products',product.uuid]">
+        <div    fxLayout="column" fxLayoutAlign="center center"   >
+            <img mat-card-image class="imgs"  fxLayoutAlign="center center" 
+            src="{{getDisplayImageFromProduct()}}" 
+            alt="Photo of {{product.Name}}" 
+            [routerLink]="['/products',product.uuid]">
+        </div>
+        
+        <div    fxLayout="row" fxLayoutAlign="space-between center"   >
+            <div  fxLayout="row" fxLayoutAlign="center center"    >
+                <button mat-icon-button   *ngFor="let rate of  BuildArrayNumber(5);let i = index "  >
+                <mat-icon    color ="accent" >
+                    {{showIcon(i)}}
+                </mat-icon>
+     
+              </button>
+            </div>
+            <mat-icon  matBadge="{{product.Stocks}}"  
+                        matBadgePosition="before" 
+                        color="accent"  
+                        matBadgeColor="primary"
+                        matBadgeOverlap="true" > store   </mat-icon>
+        </div>
+       
+    </mat-card-content>
+    <mat-card-actions>
+    
+        <div   fxLayout="row wrap"  fxLayoutAlign="space-between center" >
+            <button     mat-mini-fab 
+                    [routerLink]="['/products',product.uuid]"
+                    [color]="colorDetail"   
+                    (mouseover)="colorDetail = 'primary'" 
+                    (mouseout)="colorDetail = 'accent'" >
+                    <mat-icon>description</mat-icon>
+            </button>
+            <div  fxLayout="row wrap"  fxLayoutAlign="space-between center" >
+                  <button mat-icon-button color ="primary"   (click)="decrementQuantity()" >
+                      <mat-icon> remove_circle_outline </mat-icon>
+                  </button>
+                  <mat-form-field  style="max-width: 50px; text-align: center;">
+                      <input matInput type="number" placeholder="quantity" [(ngModel)]="quantity" >
+                  </mat-form-field>
+                  <button mat-icon-button color ="primary"   (click)="incrementQuantity()"  >
+                      <mat-icon> add_circle_outline  </mat-icon>
+                  </button>
+            </div>
+            <button         mat-mini-fab   (click)="addItemToBasket()"   matTooltip="add the product to basket" 
+                            [color]="colorAdd"   
+                            (mouseover)="colorAdd = 'primary'" 
+                            (mouseout) ="colorAdd = 'accent'"
+                            >
+
                             <mat-icon>add_shopping_cart</mat-icon>
             </button>
        

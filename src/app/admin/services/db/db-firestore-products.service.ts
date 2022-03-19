@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { IProductDTO } from 'src/app/shared/models/iproduct.model';
+import { IProductDTO } from 'src/app/shared/models/iproductFilter.model';
 import { environment } from 'src/environments/environment';
 import { DbFirestoreService } from './db-firestore.service';
  

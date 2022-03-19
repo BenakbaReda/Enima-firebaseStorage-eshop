@@ -4,18 +4,19 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { delay, of, tap } from 'rxjs';
 import { FilePickerDirective } from 'src/app/admin/directives/file-picker.directive';
-import { IImage, IProduct } from 'src/app/shared/models/iproduct.model';
+ 
 import { Upload, UploadTask } from 'src/app/admin/models/upload.model';
 import { StorageImagesService } from 'src/app/admin/services/storage/storage-images.service';
-import {  ProductService } from 'src/app/shared/services/product/product.service';
+import {  ProductService } from 'src/app/shared/services/api/product.service';
 import * as uuid from 'uuid';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { BrandService } from 'src/app/shared/services/brand/brand.service';
-import { CategorieService } from 'src/app/shared/services/categorie/categorie.service';
-import { ICategorie } from 'src/app/shared/models/icategorie.model';
-import { IBrand } from 'src/app/shared/models/ibrand.model';
+import { BrandService } from 'src/app/shared/services/api/brand.service';
+import { CategorieService } from 'src/app/shared/services/api/categorie.service';
+import { ICategorie } from 'src/app/shared/models/api/icategorie.model';
+import { IBrand } from 'src/app/shared/models/api/ibrand.model';
 import { FormControl, Validators } from '@angular/forms';
 import { IUploadInfo } from 'src/app/admin/services/storage/base/firestore-base.service';
+import { IImage, IProduct } from 'src/app/shared/models/api/iproduct.model';
 
 
 @Component({
@@ -24,6 +25,11 @@ import { IUploadInfo } from 'src/app/admin/services/storage/base/firestore-base.
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+
+  colorAdd = "accent";
+  colorDetail = "accent";
+
+  
   @BlockUI('dropzoneBlockui') blockUIdropzone: NgBlockUI;
   @ViewChild('dropZonePicker', { static: true })
   _dropZonePicker: FilePickerDirective;

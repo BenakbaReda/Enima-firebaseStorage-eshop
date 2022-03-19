@@ -4,12 +4,50 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { map, Observable } from 'rxjs';
+import { IAddress } from 'src/app/shared/models/address.model';
 import { IShopingBasketTotals } from 'src/app/shared/models/ShopingBasket.model';
 import { AccountService } from 'src/app/shared/services/account/account.service';
 import { CustomerBasketService } from '../../services/customer-basket.service';
- 
+import * as uuid from 'uuid';
 
- 
+export enum EmumDeliveryType {
+  ENIMA_SHOP= 'Livraison en magasin', 
+  RELAY_SHOP = 'Livraison en Point Relais ®',
+  CUSTOMER_HOME = 'Livraison à domicile' , 
+}
+
+
+export interface IDeliveryMode {
+  uuid: string;
+  name: string;
+  deliveryDays: number;
+  DeliveryType:EmumDeliveryType,
+  description?: string;
+  price: number;
+  address:IAddress;
+
+}
+
+const DELIVERY_TYPE_DATA: EmumDeliveryType[] = [
+  EmumDeliveryType.ENIMA_SHOP,
+  EmumDeliveryType.RELAY_SHOP, 
+  EmumDeliveryType.CUSTOMER_HOME 
+];
+
+const ELEMENT_DATA: IDeliveryMode[] = [
+  { uuid:uuid.v4() ,name:"Livraison en magasin",deliveryDays:3, DeliveryType:EmumDeliveryType.ENIMA_SHOP,
+    description:"description", price:351  ,
+    address:{     street:"11 dec 1960 N°283",  wilaya: "alger",  commune: "ain benina" } },
+
+  { uuid:uuid.v4() ,name:"Livraison en Point Relais ®",deliveryDays:3, DeliveryType:EmumDeliveryType.RELAY_SHOP,
+    description:"description", price:351  ,
+    address:{     street:"11 dec 1960 N°283",  wilaya: "alger",  commune: "ain benina" } },
+
+  { uuid:uuid.v4() ,name:"Livraison à domicile",deliveryDays:3, DeliveryType:EmumDeliveryType.CUSTOMER_HOME,
+    description:"description", price:351  ,
+    address:{     street:"11 dec 1960 N°283",  wilaya: "alger",  commune: "ain benina" } } 
+
+];
 
 @Component({
   selector: 'app-checkout',
@@ -22,10 +60,19 @@ export class CheckoutComponent implements OnInit {
   @ViewChild('stepper') private myStepper: MatStepper;
   colorNext = "accent";
   colorBefore = "accent"; 
+ 
+  DeliveryType:EmumDeliveryType[]=[]
+  DeliveryTypeSelected: EmumDeliveryType ;
+  DeliveryAddress:IAddress; 
 
 
 
-    
+
+
+
+
+
+
   O_basketTotal$: Observable<IShopingBasketTotals>;
   O_stepperOrientation: Observable<StepperOrientation>;
   isLinear = true;
@@ -47,7 +94,9 @@ export class CheckoutComponent implements OnInit {
     this.createCheckoutForm();
     this.getAddressFormValues();
     this.O_basketTotal$ = this.S_basket.O_basketTotal$;
+ 
 
+    this.DeliveryType= DELIVERY_TYPE_DATA 
   }
 
 

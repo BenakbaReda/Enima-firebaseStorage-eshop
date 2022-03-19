@@ -4,9 +4,10 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { CustomerBasketService } from 'src/app/client/services/customer-basket.service';
-import { IProduct } from 'src/app/shared/models/iproduct.model';
-import { IShopingBasket } from 'src/app/shared/models/ShopingBasket.model';
-import { ProductService } from 'src/app/shared/services/product/product.service';
+import { IShopingBasket } from 'src/app/shared/models/api/Basket.model';
+import { IProduct } from 'src/app/shared/models/api/iproduct.model';
+ 
+import { ProductService } from 'src/app/shared/services/api/product.service';
 import { getRandomAnimation } from 'src/app/_helper/helper';
 
 

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { from, Observable, of } from 'rxjs';
-import { IProductDTO } from 'src/app/shared/models/iproduct.model';
+import { IProductDTO } from 'src/app/shared/models/iproductFilter.model';
  
 import { IDbCrud } from './base/idb-crud';
 

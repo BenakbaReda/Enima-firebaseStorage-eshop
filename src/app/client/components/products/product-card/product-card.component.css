@@ -1,20 +1,29 @@
-.example-header-image {
-    background-size: cover;
+.main-header-image {
+    background-size:auto;
   }
   
-  .example-card {
-      max-width: 400px;
+  .main-card {
+      width: 320px;
       margin-bottom: 25px;
       justify-items: center;
       justify-content: center;
   }
-   
-  .imgs {
-    width: 350px;
-    height: 350px;
+  
+  
+/* 
+fill : This is default. The image is resized to fill the given dimension. If necessary, the image will be stretched or squished to fit
+contain : The image keeps its aspect ratio, but is resized to fit within the given dimension
+cover : The image keeps its aspect ratio and fills the given dimension. The image will be clipped to fit
+none : The image is not resized
+scale-down ::cue the image is scaled down to the smallest version of none or contain 
+*/
+
+.imgs {
+    height:  300px;
+    width:  300px;
     border-radius: 10px;
-    object-fit: contain;
-  }
+    object-fit: contain  ;
+}
    
 
  

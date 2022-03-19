@@ -15,12 +15,19 @@ import { BlockUIModule } from 'ng-block-ui';
 import { ClientModule } from './client/client.module';
 import { HomeComponent } from './shared/components/home/home.component';
 import { MaterialModule } from './shared/modules/material/material.module';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { NavigationComponent } from './shared/components/navigation/navigation.component';
+ 
+ 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent,
+    NavigationComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,7 @@ import { MaterialModule } from './shared/modules/material/material.module';
     MaterialModule,
     AdminModule,
     ClientModule,
-
+ 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
 

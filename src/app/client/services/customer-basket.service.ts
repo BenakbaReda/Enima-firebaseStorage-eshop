@@ -2,12 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, map } from 'rxjs';
+import { IShopingBasket, IShopingBasketItem } from 'src/app/shared/models/api/Basket.model';
+import { IProduct } from 'src/app/shared/models/api/iproduct.model';
 import { IDeliveryMethod } from 'src/app/shared/models/deliveryMethod.model';
-import { IProduct } from 'src/app/shared/models/iproduct.model';
-import { IShopingBasket, IShopingBasketItem, IShopingBasketTotals, ShopingBasket } from 'src/app/shared/models/ShopingBasket.model';
-import { BaseHttpService } from 'src/app/shared/services/base/base-http.service';
-import { BasketService } from 'src/app/shared/services/Basket/basket.service';
-import { PurchaseCodeService } from 'src/app/shared/services/purchaseCode/purchase-code.service';
+import {   IShopingBasketTotals, ShopingBasket } from 'src/app/shared/models/ShopingBasket.model';
+import { BasketService } from 'src/app/shared/services/api/basket.service';
+import { PurchaseCodeService } from 'src/app/shared/services/api/purchase-code.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

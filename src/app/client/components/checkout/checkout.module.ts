@@ -11,8 +11,7 @@ import { CheckoutSuccessComponent } from './checkout-success/checkout-success.co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from 'src/app/shared/modules/material/material.module';
-import { DeliveryModeComponent } from './delivery-mode/delivery-mode.component';
-
+ 
 
 @NgModule({
   declarations: [
@@ -22,7 +21,7 @@ import { DeliveryModeComponent } from './delivery-mode/delivery-mode.component';
     CheckoutDeliveryComponent,
     CheckoutAdressComponent,
     CheckoutComponent,
-    DeliveryModeComponent
+ 
   ],
   imports: [
     CommonModule,

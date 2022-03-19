@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
  
 import { environment } from 'src/environments/environment';
 import { IUser } from '../../models/iuser.model';
-import { BaseHttpService } from '../base/base-http.service';
+import { BaseHttpService } from './base/base-http.service';
 
 @Injectable({
   providedIn: 'root'

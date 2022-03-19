@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
  
 import {  Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { IShopingBasket, IShopingBasketItem, IShopingBasketTotals } from 'src/app/shared/models/ShopingBasket.model';
-import { PurchaseCodeService } from 'src/app/shared/services/purchaseCode/purchase-code.service';
+import { IShopingBasket, IShopingBasketItem } from 'src/app/shared/models/api/Basket.model';
+import {  IShopingBasketTotals } from 'src/app/shared/models/ShopingBasket.model';
+import { PurchaseCodeService } from 'src/app/shared/services/api/purchase-code.service';
 import { CustomerBasketService } from '../../services/customer-basket.service';
  
 
@@ -15,6 +16,10 @@ import { CustomerBasketService } from '../../services/customer-basket.service';
 })
 export class CustomerBasketComponent implements OnInit {
  
+  colorAdd = "accent";
+  colorDetail = "accent";
+
+  
   displayedColumns: string[] = ['image' , 'productName', 'price', 'quantity','total', 'actions'];
   O_basket$: Observable<IShopingBasket>;
   O_basketTotal$: Observable<IShopingBasketTotals>;
@@ -52,11 +57,14 @@ export class CustomerBasketComponent implements OnInit {
  
 
 
-  onProductBackClick() {
-    this.router.navigate(['products']);
-  }
+  // onProductBackClick() {
+  //   this.router.navigate(['products']);
+  // }
   
  
+
+ 
+
   
 }
  

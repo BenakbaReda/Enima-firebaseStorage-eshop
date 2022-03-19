@@ -117,10 +117,74 @@
 
     <mat-stepper #stepper class="example-stepper"   [orientation]="(O_stepperOrientation | async)!">
       <mat-step label="Delivery">
-        <div>
-          <app-delivery-mode  ></app-delivery-mode>
-        </div>
+        
+        <mat-radio-group  class="example-radio-group" [(ngModel)] = "DeliveryTypeSelected">
+          <mat-radio-button class="example-radio-button" *ngFor="let elm of DeliveryType"   value="{{elm}}">
+						{{elm}}
+					</mat-radio-button>
+         
+        </mat-radio-group>
+        <div>Your delivery Mode   is: {{DeliveryTypeSelected}}</div>
+       
       </mat-step>
+
+      <mat-step label="Adress delivery "> 
+        <div  fxLayout="column" fxLayoutAlign="space-around center"   fxLayoutGap="25px"    [formGroup]="addressForm">
+        
+         
+          <div  fxLayout="row wrap" fxLayoutAlign="space-around center"   fxLayoutGap="25px"     >
+                  <!-- nom  -->
+                <mat-form-field   >
+                  <mat-label>Enter your firstName</mat-label>
+                  <input matInput placeholder="name"  formControlName="firstName" id="firstName" required>
+                  <mat-icon matSuffix color="accent">account_circle</mat-icon>
+                  
+                </mat-form-field>
+
+                <!-- lastName  -->
+                <mat-form-field   >
+                <mat-label>Enter your lastName</mat-label>
+                <input matInput placeholder="lastName"  formControlName="lastName" id="lastName" required>
+                <mat-icon matSuffix color="accent">account_circle</mat-icon>
+                    
+                </mat-form-field>
+          </div>
+           
+          <div  fxLayout="row wrap" fxLayoutAlign="space-around center"   fxLayoutGap="25px"     >
+             <!-- telephone  -->
+             <mat-form-field   >
+              <mat-label>Enter your Phone number</mat-label>
+              <input  matInput placeholder="phone"  formControlName="phone" id="phone" required  > 
+              <mat-icon matSuffix color="accent">phone</mat-icon>
+            </mat-form-field>
+
+            
+            <!-- street  -->
+            <mat-form-field   >
+              <mat-label>Enter your street</mat-label>
+              <input  matInput placeholder="street"  formControlName="street" id="street" required  > 
+              <mat-icon matSuffix color="accent">  person_pin_circle  </mat-icon>
+              </mat-form-field>
+          </div>
+
+          <div  fxLayout="row wrap" fxLayoutAlign="space-around center"   fxLayoutGap="25px"    >
+              <!-- street  -->
+              <mat-form-field   >
+                <mat-label>wilaya</mat-label>
+                <input  matInput placeholder="wilaya"  formControlName="wilaya" id="wilaya" required  > 
+                <mat-icon matSuffix color="accent">place</mat-icon>
+                </mat-form-field>
+                <!-- street  -->
+                <mat-form-field   >
+                <mat-label>commune</mat-label>
+                <input  matInput placeholder="commune"  formControlName="commune" id="commune" required  > 
+                <mat-icon matSuffix color="accent">home</mat-icon>
+                </mat-form-field>
+          </div>
+    </div>
+ 
+       </mat-step>
+
       <mat-step label="payment"> 
        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro magnam consectetur laudantium ea impedit! Esse laboriosam sit iusto perferendis suscipit similique fugiat assumenda, iste magni, beatae eveniet vero non dolor!
       </mat-step>
