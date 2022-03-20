@@ -164,29 +164,30 @@
 </div>
 
  
-<div   *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)"   fxLayout="column" style="margin: 25px;"   >
+<div   *ngIf="((O_basket$ | async) != null) && ((O_basket$ | async).items.length>0)"  
+        fxLayout="column" style="margin: 5px;"   >
   <mat-toolbar  fxLayoutAlign="space-between center"  >
 
     <button     mat-mini-fab 
-                [color]="colorAdd"   
-                (mouseover)="colorAdd = 'primary'" 
-                (mouseout) ="colorAdd = 'accent'"
-                [routerLink]="['/client/products']">
+                [color]="backColors.Color"   
+                (mouseover)="backColors.Color = backColors.ColorOver" 
+                (mouseout) ="backColors.Color = backColors.ColorLeave"
+                >
       <mat-icon> arrow_back   </mat-icon>
     </button> 
 
       <button   mat-button  color="accent" >Basket  ID : {{(O_basket$ | async).uuid}}</button>
       <button mat-mini-fab    aria-label="delete Product"  
-      [color]="colorAdd"   
-      (mouseover)="colorAdd = 'primary'" 
-      (mouseout) ="colorAdd = 'accent'"
-      [routerLink]="['/client/checkout']"  >
+      [color]="CheckoutColors.Color"   
+      (mouseover)="CheckoutColors.Color = CheckoutColors.ColorOver" 
+      (mouseout) ="CheckoutColors.Color = CheckoutColors.ColorLeave"
+        >
           <mat-icon> check_circle  </mat-icon>
       </button>
   </mat-toolbar>
-  <div    fxLayout="row wrap" fxLayoutAlign="space-around   center">
-    <div fxLayout="column"  style="margin: 25px;"     fxFlex="45">
-        <mat-toolbar  d fxLayoutAlign="space-around center"  >
+  <div  fxLayout.sm="column"    fxLayout.xs="column"     fxLayout="row" fxLayoutAlign="space-around   center">
+    <div fxLayout="column"  style="margin: 5px;"  fxLayoutAlign="space-between stretch"   fxFlex="45">
+        <mat-toolbar color="primary"   fxLayoutAlign="space-around center"  >
           <span>product basket  :</span>
         </mat-toolbar>
         <mat-table    #table [dataSource]="(O_basket$ | async).items"   >
@@ -194,7 +195,7 @@
             <mat-header-cell *matHeaderCellDef  >Image</mat-header-cell>
             <mat-cell *matCellDef="let row"  style="margin-top: 10px;">
               
-              <img mat-card-image class="imgs"    src="{{row.image}}" alt="Photo of {{row.Name}}"   [routerLink]="['/products',row.id]">
+              <img mat-card-image class="imgs"    src="{{row.image}}" alt="Photo of {{row.Name}}"  >
               
               </mat-cell>
           </ng-container>
@@ -246,13 +247,13 @@
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
     </div>
-    <div fxLayout="column"   style="margin: 25px;"     fxFlex="45">
+    <div fxLayout="column"   style="margin: 5px;"      fxFlex="45">
         <mat-toolbar    >
           <span>Order Summary  :</span>
-          
         </mat-toolbar>
-          <p>Shipping costs will be added depending on choices made during checkout</p>
-        <div  fxLayout="column"      >
+        <div  fxLayout="column"      >   
+           <p>Shipping costs will be added depending on choices made during checkout</p>
+
           <div fxLayout="row wrap"  fxLayoutAlign="space-between center" >
             <button  mat-button color ="accent"   >
              total arcticle
@@ -290,6 +291,7 @@
             </button>
             <button  mat-button color ="primary"     >{{(O_basketTotal$ | async).total }} DA</button>
           </div>
+          <mat-divider ></mat-divider>
         </div>
  
     </div>

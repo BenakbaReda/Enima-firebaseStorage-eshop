@@ -19,7 +19,7 @@
       <div  *ngIf="DisplayProducts.length>0"  
         fxLayout="row wrap" fxLayoutGap="55px"   
         fxLayoutAlign="space-around center" >
-          <app-product-card  *ngFor="let product of DisplayProducts"   class ="animate__animated  animate__zoomIn  animate__slow  "
+          <app-product-card  *ngFor="let product of DisplayProducts"  
                              
                               [product]="product"  seletedAnimation = "animate__animated  animate__heartBeat  animate__slower animate__infinite">
           </app-product-card>

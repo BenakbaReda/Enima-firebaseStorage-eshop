@@ -5,7 +5,15 @@ import { tap } from 'rxjs';
  
 import { StorageImagesService } from 'src/app/admin/services/storage/storage-images.service';
 import { IImage, IProduct } from 'src/app/shared/models/api/iproduct.model';
+import { IButtonEventColor } from 'src/app/shared/models/ShopingBasket.model';
 import {  ProductService } from 'src/app/shared/services/api/product.service';
+
+
+const   btnEventColor:IButtonEventColor[] =[
+
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },  
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },
+]
 
 @Component({
   selector: 'app-del',
@@ -14,8 +22,8 @@ import {  ProductService } from 'src/app/shared/services/api/product.service';
 })
 export class DelComponent implements OnInit {
 
-  colorAdd = "accent";
-  colorDetail = "accent";
+  colorDel:IButtonEventColor =btnEventColor[0];
+  colorBack:IButtonEventColor =btnEventColor[1];
 
   data: IProduct; 
   uuid:string =""; 

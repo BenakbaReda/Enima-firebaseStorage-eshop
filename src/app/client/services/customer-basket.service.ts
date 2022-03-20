@@ -47,6 +47,8 @@ setCodePrice(code: string) {
           if(dateNow <= res.end_date  )
           {
             this.PurchaseCodeValue = res.value;
+            this.toastr.success("your code is valid ", "Code Info");
+             
           }
           else{
             this.PurchaseCodeValue = 0;

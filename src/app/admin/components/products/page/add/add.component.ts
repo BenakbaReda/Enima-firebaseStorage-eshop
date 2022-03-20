@@ -17,6 +17,14 @@ import { IBrand } from 'src/app/shared/models/api/ibrand.model';
 import { FormControl, Validators } from '@angular/forms';
 import { IUploadInfo } from 'src/app/admin/services/storage/base/firestore-base.service';
 import { IImage, IProduct } from 'src/app/shared/models/api/iproduct.model';
+import { IButtonEventColor } from 'src/app/shared/models/ShopingBasket.model';
+
+const   btnEventColor:IButtonEventColor[] =[
+
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },  
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },
+]
+
 
 
 @Component({
@@ -25,11 +33,14 @@ import { IImage, IProduct } from 'src/app/shared/models/api/iproduct.model';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+ 
 
-  colorAdd = "accent";
-  colorDetail = "accent";
+  colorAdd:IButtonEventColor =btnEventColor[0];
+  colorBack:IButtonEventColor =btnEventColor[1];
+ 
 
-  
+
+
   @BlockUI('dropzoneBlockui') blockUIdropzone: NgBlockUI;
   @ViewChild('dropZonePicker', { static: true })
   _dropZonePicker: FilePickerDirective;

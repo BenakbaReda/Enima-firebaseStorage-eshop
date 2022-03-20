@@ -83,12 +83,14 @@
         <mat-card-subtitle>Code brand : {{product.Brand}} </mat-card-subtitle> 
     </mat-card-header>
 
-    <mat-card-content [routerLink]="['/products',product.uuid]">
+    <mat-card-content [routerLink]="['client/products',product.uuid]"  >
         <div    fxLayout="column" fxLayoutAlign="center center"   >
             <img mat-card-image class="imgs"  fxLayoutAlign="center center" 
             src="{{getDisplayImageFromProduct()}}" 
             alt="Photo of {{product.Name}}" 
-            [routerLink]="['/products',product.uuid]">
+           
+             (click)="ngProductDetail()"
+            >
         </div>
         
         <div    fxLayout="row" fxLayoutAlign="space-between center"   >

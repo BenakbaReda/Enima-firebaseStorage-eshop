@@ -3,11 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IShopingBasket, IShopingBasketItem } from 'src/app/shared/models/api/Basket.model';
-import {  IShopingBasketTotals } from 'src/app/shared/models/ShopingBasket.model';
+import {  IButtonEventColor, IShopingBasketTotals } from 'src/app/shared/models/ShopingBasket.model';
 import { PurchaseCodeService } from 'src/app/shared/services/api/purchase-code.service';
 import { CustomerBasketService } from '../../services/customer-basket.service';
  
+const   btnEventColor:IButtonEventColor[] =[
 
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },  
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },
+]
 
 @Component({
   selector: 'app-customer-basket',
@@ -16,8 +20,9 @@ import { CustomerBasketService } from '../../services/customer-basket.service';
 })
 export class CustomerBasketComponent implements OnInit {
  
-  colorAdd = "accent";
-  colorDetail = "accent";
+  backColors:IButtonEventColor =btnEventColor[0];
+  CheckoutColors:IButtonEventColor =btnEventColor[1];
+ 
 
   
   displayedColumns: string[] = ['image' , 'productName', 'price', 'quantity','total', 'actions'];

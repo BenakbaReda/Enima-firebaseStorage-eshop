@@ -62,16 +62,6 @@ const cardAnimation = trigger('cardAnimation',
  
 
 
-
-
-
-
-
-
-
-
-
-
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -92,9 +82,12 @@ export class ProductDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,private router: Router, 
     private S_customerBasket:CustomerBasketService , 
     private toastr: ToastrService,
-    private productService:  ProductService) {  }
+    private productService:  ProductService) {  
+      console.log("loading detail product")
+    }
 
   ngOnInit(): void {
+    console.log("ngOnInit detail product")
     this.selectedAnimation = getRandomAnimation();
 
     this.route.paramMap.subscribe((params: ParamMap) => {

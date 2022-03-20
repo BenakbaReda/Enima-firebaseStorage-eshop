@@ -21,3 +21,10 @@ export interface IShopingBasketTotals {
 }
  
  
+export interface IButtonEventColor {
+
+    Color :string;
+    ColorOver:string;
+    ColorLeave:string; 
+}
+

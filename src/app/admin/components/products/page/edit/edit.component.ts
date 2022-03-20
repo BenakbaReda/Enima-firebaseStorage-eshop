@@ -11,6 +11,7 @@ import { StorageImagesService } from 'src/app/admin/services/storage/storage-ima
 import { IBrand } from 'src/app/shared/models/api/ibrand.model';
 import { ICategorie } from 'src/app/shared/models/api/icategorie.model';
 import { IImage, IProduct } from 'src/app/shared/models/api/iproduct.model';
+import { IButtonEventColor } from 'src/app/shared/models/ShopingBasket.model';
  
 import { BrandService } from 'src/app/shared/services/api/brand.service';
 import { CategorieService } from 'src/app/shared/services/api/categorie.service';
@@ -29,6 +30,13 @@ export interface IUpdateImage  {
   percentage?: number;
 }
 
+const   btnEventColor:IButtonEventColor[] =[
+
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },  
+  { Color:"accent", ColorOver: "primary", ColorLeave: "accent" },
+]
+
+
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -36,8 +44,8 @@ export interface IUpdateImage  {
 })
 export class EditComponent implements OnInit {
 
-  colorAdd = "accent";
-  colorDetail = "accent";
+  colorEdit:IButtonEventColor =btnEventColor[0];
+  colorBack:IButtonEventColor =btnEventColor[1];
 
   data: IProduct; 
   Images     :IUpdateImage [] =[] ;

@@ -7,12 +7,12 @@ import { IProduct } from 'src/app/shared/models/api/iproduct.model';
 import {  IProductFilter } from 'src/app/shared/models/iproductFilter.model';
 import { ProductService } from 'src/app/shared/services/api/product.service';
 import { DiagFilterComponent,
-   DIAG_CONST_FILTRE_BRAND_ALL_VALUE, 
-   DIAG_CONST_FILTRE_CATEGORIE_ALL_VALUE } from './diag-filter/diag-filter.component';
+DIAG_CONST_FILTRE_BRAND_ALL_VALUE, 
+DIAG_CONST_FILTRE_CATEGORIE_ALL_VALUE } from './diag-filter/diag-filter.component';
 
 
 
-  const CONST_PAGE_SIZE=8;
+const CONST_PAGE_SIZE=8;
 const CONST_START_INDEX=0 ;
 const CONST_END_INDEX=8 ;
 const CONST_PAGE_SIZE_OPTION: number[] = [8, 12, 20, 24, 32];
@@ -54,7 +54,7 @@ export class ProductsComponent implements OnInit {
      
 
   //constructor object
-  constructor( private router: Router, 
+  constructor(  
     public dialog: MatDialog , 
      private toastr: ToastrService,
     private productService: ProductService  ) {}
@@ -165,10 +165,7 @@ ngOnInit() {
  
 
  
- onProductClick() {
-  this.router.navigate(['productdetails']);
-}
-
+ 
 
 
 openDialog(): void {

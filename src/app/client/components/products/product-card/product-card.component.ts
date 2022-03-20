@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
  
 import { CustomerBasketService } from 'src/app/client/services/customer-basket.service';
 import { IProduct } from 'src/app/shared/models/api/iproduct.model';
@@ -19,16 +20,22 @@ export class ProductCardComponent implements OnInit {
 
 
 
-  constructor(   private Service: CustomerBasketService   ) { }
+  constructor( private router: Router ,   
+               private Service: CustomerBasketService   ) { }
  
 
   ngOnInit(): void {
 
-
+    
     
   }
 
-  
+  ngProductDetail(): void {
+
+    console.log("ngProductDetail")
+    this.router.navigate(['products', this.product.uuid])
+  }
+
   BuildArrayNumber(length){
     return new Array(length);
   }
